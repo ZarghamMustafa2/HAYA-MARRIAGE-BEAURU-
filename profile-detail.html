@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Detail | Haya Marriage Bureau</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="page-fade">
+    <header class="luxury-header">
+        <div class="container header-inner">
+            <!-- Left: Contact Details -->
+            <div class="header-left">
+                <a href="mailto:hayamarriageebureau@gmail.com"><i class="fas fa-envelope"></i> hayamarriageebureau@gmail.com</a>
+                <a href="https://wa.me/923134089228"><i class="fab fa-whatsapp"></i> 0313-4089228</a>
+            </div>
+
+            <!-- Center: Script Logo Only -->
+            <div class="header-center">
+                <a href="index.html" style="text-decoration: none;">
+                    <span class="logo-text-script">Hayamarriageebureau</span>
+                </a>
+            </div>
+
+            <!-- Right: Navigation & Pill Button -->
+            <div class="header-right">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="profiles.html" class="nav-link active">Profiles</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                    <li><a href="packages.html" class="nav-link">Membership</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="register.html" class="btn-join-elite">Join the Elite</a>
+                <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay">
+        <i class="fas fa-times close-btn"></i>
+        <a href="index.html">Home</a>
+        <a href="profiles.html">Profiles</a>
+        <a href="about.html">Our Story</a>
+        <a href="packages.html">Membership</a>
+        <a href="contact.html">Contact</a>`n        <a href="register.html" style="color: var(--white); background: var(--accent); padding: 10px 20px; border-radius: 5px; text-align: center; margin-top: 20px;">Join the Elite</a>
+    </div>
+
+    <main class="container" style="padding-top: 150px; padding-bottom: 100px;">
+        <a href="javascript:history.back()" style="display: inline-flex; align-items: center; gap: 10px; color: var(--primary); text-decoration: none; font-weight: 700; margin-bottom: 40px;">
+            <i class="fas fa-arrow-left"></i> Back to Search
+        </a>
+
+        <div style="display: grid; grid-template-columns: 400px 1fr; gap: 60px; align-items: start;">
+            <!-- Profile Sidebar Card -->
+            <div style="background: var(--white); border-radius: 24px; padding: 40px; box-shadow: var(--shadow-deep); text-align: center; position: sticky; top: 120px;">
+                <div class="card-img-wrap" style="width: 100%; height: 300px; margin-bottom: 30px;">
+                    <img id="detailImg" src="images/profiles/composite_1.png" alt="Profile Image" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                </div>
+                <h1 id="detailName" style="color: var(--primary); font-size: 2.2rem; margin-bottom: 10px;">User Name</h1>
+                <p id="detailTagline" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Professional Title</p>
+                <div style="display: flex; flex-direction: column; gap: 15px;">
+                    <button class="btn-minimal btn-primary" style="width: 100%; border: none; cursor: pointer;">Express Interest</button>
+                    <button class="btn-minimal" style="width: 100%; border: 2px solid var(--accent); color: var(--primary); cursor: pointer; font-weight: 700;">Request Photo</button>
+                </div>
+                <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05);">
+                    <div style="background: rgba(212, 175, 55, 0.1); color: var(--primary); padding: 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 800;">
+                        <i class="fas fa-shield-alt" style="margin-right: 8px;"></i> MANUALLY VERIFIED PROFILE
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Details Content -->
+            <div style="background: var(--white); border-radius: 24px; padding: 60px; box-shadow: var(--shadow-soft);">
+                <div style="margin-bottom: 50px;">
+                    <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 25px;">Basic Summary</h2>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+                        <div class="card-meta" style="font-size: 1.1rem;">
+                            <li style="margin-bottom: 15px;"><i class="fas fa-birthday-cake"></i> <strong>Age:</strong> <span id="detailAge">25</span></li>
+                            <li style="margin-bottom: 15px;"><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> <span id="detailLocation">City</span></li>
+                            <li style="margin-bottom: 15px;"><i class="fas fa-mosque"></i> <strong>Sect:</strong> <span id="detailSect">Sunni</span></li>
+                        </div>
+                        <div class="card-meta" style="font-size: 1.1rem;">
+                            <li style="margin-bottom: 15px;"><i class="fas fa-users"></i> <strong>Caste:</strong> <span id="detailCaste">Not Specified</span></li>
+                            <li style="margin-bottom: 15px;"><i class="fas fa-ring"></i> <strong>Marital Status:</strong> Single</li>
+                            <li style="margin-bottom: 15px;"><i class="fas fa-arrows-alt-v"></i> <strong>Height:</strong> 5' 6"</li>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 50px; padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 25px;">Education & Career</h2>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+                        <div class="card-meta" style="font-size: 1.1rem;">
+                            <li style="margin-bottom: 15px;"><i class="fas fa-graduation-cap"></i> <strong>Qualification:</strong> <span id="detailEducation">Degree</span></li>
+                        </div>
+                        <div class="card-meta" style="font-size: 1.1rem;">
+                            <li style="margin-bottom: 15px;"><i class="fas fa-briefcase"></i> <strong>Profession:</strong> <span id="detailProfession">Job Title</span></li>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding-top: 40px; border-top: 1px solid rgba(0,0,0,0.05);">
+                    <h2 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 25px;">Family Information</h2>
+                    <p style="color: var(--text-muted); font-size: 1.1rem; line-height: 1.8;">The user's family values are categorized as <strong>Moderate</strong>. Further family details (father's profession, siblings) are kept confidential and are only shared with serious matches through our guided introductory process.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <img src="images/official_logo.png" class="footer-logo-large" alt="Haya Bureau Logo">
+                
+
+                
+                <ul class="footer-links">
+                    <li><a href="about.html">Privacy</a></li>
+                    <li><a href="about.html">Terms</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="about.html">Our Heritage</a></li>
+                </ul>
+
+                <div class="footer-socials">
+                    <a href="https://web.facebook.com/profile.php?id=61583555798844" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/hayamarriageebureau?igsh=eXlzOGR5bGh1YTY3" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923134089228" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 Haya Marriage Bureau. Zenith of Matrimony.
+                </div>
+                
+                <div class="developer-signature" style="font-size: 13px; font-weight: 300; color: var(--accent);">
+                    Developed by: <a href="https://wa.me/923079661669" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 300;">Zargham Mustafa</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/923134089228" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script src="js/ui.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            const name = params.get('name') || 'Elite Member';
+            const age = params.get('age') || 'N/A';
+            const city = params.get('city') || 'Location Verified';
+            const education = params.get('education') || 'Verified Degree';
+            const profession = params.get('profession') || 'Distinguished Professional';
+            const caste = params.get('caste') || 'Confidential';
+            const img = params.get('img') || 'avatar_male.png';
+
+            document.getElementById('detailName').textContent = name;
+            document.getElementById('detailAge').textContent = age;
+            document.getElementById('detailLocation').textContent = city;
+            document.getElementById('detailEducation').textContent = education;
+            document.getElementById('detailProfession').textContent = profession;
+            document.getElementById('detailTagline').textContent = profession;
+            document.getElementById('detailCaste').textContent = caste;
+            document.getElementById('detailImg').src = `images/profiles/${img}`;
+            
+            document.title = `${name} | Haya Marriage Bureau`;
+        });
+    </script>
+</body>
+</html>
