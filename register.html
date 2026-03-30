@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join the Elite | Haya Marriage Bureau</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-maroon: #800000;
+            --accent-gold: #D4AF37;
+            --cream-bg: #FFFDF5;
+            --maroon-glow: rgba(74, 4, 4, 0.15);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: url('https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&q=80&w=1920') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin: 0;
+            padding: 80px 20px 40px; /* Adjusted for sticky header */
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        .luxury-card {
+            background: var(--cream-bg);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 800px;
+            padding: 60px;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 10px 30px var(--maroon-glow);
+            border: 1px solid var(--accent-gold);
+        }
+
+        .progress-container {
+            margin-bottom: 50px;
+        }
+
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .step-label {
+            font-size: 0.7rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(128, 0, 0, 0.4);
+            transition: 0.3s;
+        }
+
+        .step-label.active {
+            color: var(--accent-gold);
+        }
+
+        .progress-bar-wrap {
+            height: 6px;
+            background: rgba(128, 0, 0, 0.1); /* Light Maroon */
+            border-radius: 10px;
+            position: relative;
+        }
+
+        #progressBar {
+            position: absolute;
+            top: 0; left: 0; height: 100%;
+            background: var(--accent-gold);
+            width: 16.6%;
+            border-radius: 10px;
+            transition: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+        }
+
+        .form-step {
+            display: none;
+            animation: slideUp 0.5s ease-out forwards;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.8rem;
+            color: var(--primary-maroon);
+            margin-bottom: 35px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .input-wrap {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .input-wrap i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-gold);
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .input-wrap input, .input-wrap select {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            border-radius: 12px;
+            border: 1.5px solid var(--accent-gold);
+            background: white;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: 0.3s;
+            box-sizing: border-box;
+            color: #333;
+        }
+
+        .input-wrap input::placeholder {
+            color: rgba(128, 0, 0, 0.3); /* Subtle maroon-tint placeholder */
+        }
+
+        .input-wrap input:focus, .input-wrap select:focus {
+            outline: none;
+            border-color: var(--primary-maroon);
+            box-shadow: 0 5px 15px rgba(128, 0, 0, 0.08);
+        }
+
+        .input-wrap label {
+            position: absolute;
+            left: 55px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333333; /* Charcoal Grey */
+            pointer-events: none;
+            transition: 0.3s;
+        }
+
+        .input-wrap input:focus ~ label,
+        .input-wrap input:not(:placeholder-shown) ~ label,
+        .input-wrap select:focus ~ label,
+        .input-wrap select:not([value=""]) ~ label {
+            top: -10px;
+            left: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            background: var(--cream-bg);
+            color: var(--primary-maroon);
+            padding: 2px 10px;
+            border-radius: 5px;
+            transform: none;
+        }
+
+        .nav-btns {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+        }
+
+        .btn-luxury {
+            padding: 18px 45px;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.4s;
+            border: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .btn-prev {
+            background: transparent;
+            color: var(--primary-maroon);
+            border: 1.5px solid var(--accent-gold);
+        }
+
+        .btn-prev:hover {
+            background: rgba(128, 0, 0, 0.05);
+        }
+
+        .btn-next {
+            background: linear-gradient(135deg, #D4AF37, #F2D480, #D4AF37);
+            background-size: 200% auto;
+            color: var(--primary-maroon);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-next:hover {
+            background-position: right center;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .luxury-card { padding: 40px 30px; }
+            .grid-2 { grid-template-columns: 1fr; gap: 10px; }
+            .header-simple .logo { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="luxury-header">
+        <div class="container header-inner">
+            <!-- Left: Contact Details -->
+            <div class="header-left">
+                <a href="mailto:hayamarriageebureau@gmail.com"><i class="fas fa-envelope"></i> hayamarriageebureau@gmail.com</a>
+                <a href="https://wa.me/923134089228"><i class="fab fa-whatsapp"></i> 0313-4089228</a>
+            </div>
+
+            <!-- Center: Script Logo Only -->
+            <div class="header-center">
+                <a href="index.html" style="text-decoration: none;">
+                    <span class="logo-text-script">Hayamarriageebureau</span>
+                </a>
+            </div>
+
+            <!-- Right: Navigation & Pill Button -->
+            <div class="header-right">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="profiles.html" class="nav-link">Profiles</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                    <li><a href="packages.html" class="nav-link">Membership</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="register.html" class="btn-join-elite">Join the Elite</a>
+                <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay">
+        <i class="fas fa-times close-btn"></i>
+        <a href="index.html">Home</a>
+        <a href="profiles.html">Profiles</a>
+        <a href="about.html">Our Story</a>
+        <a href="packages.html">Membership</a>
+        <a href="contact.html">Contact</a>`n        <a href="register.html" style="color: var(--white); background: var(--accent); padding: 10px 20px; border-radius: 5px; text-align: center; margin-top: 20px;">Join the Elite</a>
+    </div>
+
+    <div class="luxury-card animate-fade-in">
+        <div class="progress-container">
+            <div class="progress-labels">
+                <span class="step-label active">Basics</span>
+                <span class="step-label">Personal</span>
+                <span class="step-label">Career</span>
+                <span class="step-label">Family</span>
+                <span class="step-label">Partner</span>
+                <span class="step-label">Safety</span>
+            </div>
+            <div class="progress-bar-wrap">
+                <div id="progressBar"></div>
+            </div>
+        </div>
+
+        <form id="luxuryForm">
+            <!-- Step 1: Basics -->
+            <div class="form-step active" id="step1">
+                <h2 class="step-title">The Foundation</h2>
+                <div class="input-wrap">
+                    <i class="fas fa-user-tie"></i>
+                    <input type="text" id="fullName" placeholder=" " required>
+                    <label>Your Full Name</label>
+                </div>
+                <div class="input-wrap">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" placeholder=" " required>
+                    <label>Private Email</label>
+                </div>
+                <div class="grid-2">
+                    <div class="input-wrap">
+                        <i class="fas fa-phone"></i>
+                        <input type="tel" id="phone" placeholder=" " required>
+                        <label>Phone Number</label>
+                    </div>
+                    <div class="input-wrap">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="cnic" placeholder=" " required>
+                        <label>CNIC (Verified Only)</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2: Personal -->
+            <div class="form-step" id="step2">
+                <h2 class="step-title">Personal Essence</h2>
+                <div class="grid-2">
+                    <div class="input-wrap">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="number" id="age" placeholder=" " min="18" required>
+                        <label>Age</label>
+                    </div>
+                    <div class="input-wrap">
+                        <i class="fas fa-venus-mars"></i>
+                        <select id="gender" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" id="city" placeholder=" " required>
+                    <label>Current City</label>
+                </div>
+                <div class="input-wrap">
+                    <i class="fas fa-mosque"></i>
+                    <select id="sect" required>
+                        <option value="" disabled selected>Sect / Maslak</option>
+                        <option value="Sunni">Sunni</option>
+                        <option value="Shia">Shia</option>
+                        <option value="Ahle-Hadith">Ahle-Hadith</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 3: Career -->
+            <div class="form-step" id="step3">
+                <h2 class="step-title">Ambition & Growth</h2>
+                <div class="input-wrap">
+                    <i class="fas fa-graduation-cap"></i>
+                    <select id="education" required>
+                        <option value="" disabled selected>Select Highest Qualification</option>
+                        <optgroup label="Schooling">
+                            <option value="Primary">Primary</option>
+                            <option value="Middle">Middle</option>
+                            <option value="Matric / O-Levels">Matric / O-Levels</option>
+                            <option value="Intermediate / A-Levels">Intermediate / A-Levels</option>
+                        </optgroup>
+                        <optgroup label="Undergraduate">
+                            <option value="Diploma (DAE)">Diploma (DAE)</option>
+                            <option value="Bachelors">Bachelors (BA/BSc/B.Com)</option>
+                            <option value="BS (Hons)">BS (Hons) / 4-Year Degree</option>
+                        </optgroup>
+                        <optgroup label="Postgraduate">
+                            <option value="Masters">Masters (MA/MSc/M.Com)</option>
+                            <option value="MS / M.Phil">MS / M.Phil</option>
+                        </optgroup>
+                        <optgroup label="Doctorate">
+                            <option value="PhD / Doctorate">PhD / Doctorate</option>
+                        </optgroup>
+                        <optgroup label="Medical & Professional">
+                            <option value="MBBS">MBBS</option>
+                            <option value="BDS">BDS</option>
+                            <option value="MD">MD</option>
+                            <option value="DVM">DVM</option>
+                            <option value="Pharm-D">Pharm-D</option>
+                        </optgroup>
+                        <optgroup label="Finance/Accounts">
+                            <option value="CA">CA</option>
+                            <option value="ACCA">ACCA</option>
+                            <option value="ACMA">ACMA</option>
+                        </optgroup>
+                        <optgroup label="Religious">
+                            <option value="Alim / Alimah">Alim / Alimah</option>
+                            <option value="Hafiz-e-Quran">Hafiz-e-Quran</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="input-wrap">
+                    <i class="fas fa-briefcase"></i>
+                    <input type="text" id="profession" placeholder=" " required>
+                    <label>Current Profession</label>
+                </div>
+                <div class="input-wrap">
+                    <i class="fas fa-coins"></i>
+                    <select id="income">
+                        <option value="" disabled selected>Monthly Income</option>
+                        <option value="50k-100k">50,000 - 100,000 PKR</option>
+                        <option value="100k-250k">100,000 - 250,000 PKR</option>
+                        <option value="250k-plus">Above 250,000 PKR</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 4: Family -->
+            <div class="form-step" id="step4">
+                <h2 class="step-title">Family Heritage</h2>
+                <div class="grid-2">
+                    <div class="input-wrap">
+                        <i class="fas fa-user-friends"></i>
+                        <input type="text" id="fatherProf" placeholder=" " required>
+                        <label>Father's Profession</label>
+                    </div>
+                    <div class="input-wrap">
+                        <i class="fas fa-female"></i>
+                        <input type="text" id="motherProf" placeholder=" " required>
+                        <label>Mother's Profession</label>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <i class="fas fa-users-cog"></i>
+                    <select id="values" required>
+                        <option value="Religious">Religious</option>
+                        <option value="Moderate" selected>Moderate</option>
+                        <option value="Liberal">Liberal</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Step 5: Partner -->
+            <div class="form-step" id="step5">
+                <h2 class="step-title">Desired Connection</h2>
+                <div class="grid-2">
+                    <div class="input-wrap">
+                        <input type="number" id="pAgeMin" placeholder=" " value="20">
+                        <label>Min Age Preference</label>
+                    </div>
+                    <div class="input-wrap">
+                        <input type="number" id="pAgeMax" placeholder=" " value="35">
+                        <label>Max Age Preference</label>
+                    </div>
+                </div>
+                <div class="input-wrap">
+                    <i class="fas fa-certificate"></i>
+                    <input type="text" placeholder=" ">
+                    <label>Preferred Education Level</label>
+                </div>
+            </div>
+
+            <!-- Step 6: Safety -->
+            <div class="form-step" id="step6">
+                <h2 class="step-title">Safety & Verification</h2>
+                <p style="color: #666; text-align: center; margin-bottom: 30px; font-size: 0.9rem;">To maintain our elite circle, we require a clear face photo and identity verification.</p>
+                <div class="input-wrap">
+                    <i class="fas fa-camera"></i>
+                    <input type="file" accept="image/*">
+                    <label style="top: -10px; left: 20px; font-size: 0.75rem; background: var(--cream-bg); color: var(--primary-maroon); transform: none; font-weight: 800; padding: 2px 10px; border-radius: 5px;">Profile Photo</label>
+                </div>
+                <div class="input-wrap" style="display: flex; align-items: center; gap: 15px; background: rgba(128, 0, 0, 0.05); padding: 20px; border-radius: 15px; border: 1px solid var(--accent-gold);">
+                    <input type="checkbox" id="terms" style="width: auto; accent-color: var(--primary-maroon);" required>
+                    <label style="position: static; font-size: 0.85rem; color: #333; transform: none; font-weight: 600;">I abide by the values of honor and sincerity in this discovery process.</label>
+                </div>
+            </div>
+
+            <div class="nav-btns">
+                <button type="button" class="btn-luxury btn-prev" id="prevBtn" style="visibility: hidden;">Previous</button>
+                <button type="button" class="btn-luxury btn-next" id="nextBtn">Continue Journey</button>
+                <button type="submit" class="btn-luxury btn-next" id="submitBtn" style="display: none;">Join the Elite</button>
+            </div>
+        </form>
+    </div>
+
+    <script type="module" src="js/register.js"></script>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <img src="images/official_logo.png" class="footer-logo-large" alt="Haya Bureau Logo">
+                
+
+                
+                <ul class="footer-links">
+                    <li><a href="about.html">Privacy</a></li>
+                    <li><a href="about.html">Terms</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="about.html">Our Heritage</a></li>
+                </ul>
+
+                <div class="footer-socials">
+                    <a href="https://web.facebook.com/profile.php?id=61583555798844" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/hayamarriageebureau?igsh=eXlzOGR5bGh1YTY3" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923134089228" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 Haya Marriage Bureau. Zenith of Matrimony.
+                </div>
+                
+                <div class="developer-signature" style="font-size: 13px; font-weight: 300; color: var(--accent);">
+                    Developed by: <a href="https://wa.me/923079661669" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 300;">Zargham Mustafa</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/923134089228" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

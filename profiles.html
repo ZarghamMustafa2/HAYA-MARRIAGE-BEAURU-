@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verified Profiles | Haya Marriage Bureau</title>
+    <meta http-equiv="Cache-Control" content="max-age=31104000">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        .page-header {
+            padding-top: 180px;
+            padding-bottom: 80px;
+            background: var(--primary);
+            color: var(--white);
+            text-align: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .search-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 50px;
+            padding: 80px 0;
+        }
+        .filter-sidebar {
+            background: var(--white);
+            padding: 40px;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-soft);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+        }
+        .filter-group { margin-bottom: 30px; }
+        .filter-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--primary);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            font-family: inherit;
+            font-weight: 600;
+            background: transparent;
+        }
+        @media (max-width: 1100px) {
+            .search-container { grid-template-columns: 1fr; }
+            .filter-sidebar { display: none; }
+        }
+    </style>
+</head>
+<body class="page-fade">
+    <header class="luxury-header">
+        <div class="container header-inner">
+            <!-- Left: Contact Details -->
+            <div class="header-left">
+                <a href="mailto:hayamarriageebureau@gmail.com"><i class="fas fa-envelope"></i> hayamarriageebureau@gmail.com</a>
+                <a href="https://wa.me/923134089228"><i class="fab fa-whatsapp"></i> 0313-4089228</a>
+            </div>
+
+            <!-- Center: Script Logo Only -->
+            <div class="header-center">
+                <a href="index.html" style="text-decoration: none;">
+                    <span class="logo-text-script">Hayamarriageebureau</span>
+                </a>
+            </div>
+
+            <!-- Right: Navigation & Pill Button -->
+            <div class="header-right">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="profiles.html" class="nav-link active">Profiles</a></li>
+                    <li><a href="about.html" class="nav-link">Our Story</a></li>
+                    <li><a href="packages.html" class="nav-link">Membership</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <a href="register.html" class="btn-join-elite">Join the Elite</a>
+                <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Nav Overlay -->
+    <div class="mobile-nav-overlay">
+        <i class="fas fa-times close-btn"></i>
+        <a href="index.html">Home</a>
+        <a href="profiles.html" class="active">Profiles</a>
+        <a href="about.html">Our Story</a>
+        <a href="packages.html">Membership</a>
+        <a href="contact.html">Contact</a>`n        <a href="register.html" style="color: var(--white); background: var(--accent); padding: 10px 20px; border-radius: 5px; text-align: center; margin-top: 20px;">Join the Elite</a>
+    </div>
+
+    <div class="page-header">
+        <div class="container">
+            <h1 style="font-size: 4rem; margin-bottom: 15px; font-family: 'Playfair Display', serif;">Elite Discoveries</h1>
+            <p style="font-size: 1.2rem; opacity: 0.8;">25 Hand-picked previews of exceptional individuals.</p>
+        </div>
+    </div>
+
+    <div class="container search-container">
+        <aside class="filter-sidebar animate">
+            <h3 style="margin-bottom: 30px; font-size: 1.8rem; color: var(--primary); font-family: 'Playfair Display', serif;">Refine Results</h3>
+            <div class="filter-group">
+                <label>Searching For</label>
+                <select id="filterGender"><option value="Bride">Bride</option><option value="Groom">Groom</option></select>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <div class="filter-group">
+                    <label>Min Age</label>
+                    <select id="filterMinAge">
+                        <option value="20">20</option>
+                        <option value="22">22</option>
+                        <option value="24">24</option>
+                        <option value="26">26</option>
+                        <option value="28">28</option>
+                        <option value="30">30</option>
+                        <option value="32">32</option>
+                        <option value="34">34</option>
+                        <option value="36">36</option>
+                        <option value="38">38</option>
+                        <option value="40">40</option>
+                        <option value="42">42</option>
+                        <option value="44">44</option>
+                        <option value="46">46</option>
+                        <option value="48">48</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Max Age</label>
+                    <select id="filterMaxAge">
+                        <option value="50">50</option>
+                        <option value="48">48</option>
+                        <option value="46">46</option>
+                        <option value="44">44</option>
+                        <option value="42">42</option>
+                        <option value="40">40</option>
+                        <option value="38">38</option>
+                        <option value="36">36</option>
+                        <option value="34">34</option>
+                        <option value="32">32</option>
+                        <option value="30">30</option>
+                        <option value="28">28</option>
+                        <option value="26">26</option>
+                        <option value="24">24</option>
+                        <option value="22">22</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label>City</label>
+                <select id="filterCity">
+                    <option value="Any">All Cities</option>
+                     <option value="Karachi">Karachi</option>
+                    <option value="Lahore">Lahore</option>
+                    <option value="Islamabad">Islamabad</option>
+                    <option value="Rawalpindi">Rawalpindi</option>
+                    <option value="Faisalabad">Faisalabad</option>
+                    <option value="Multan">Multan</option>
+                    <option value="Peshawar">Peshawar</option>
+                    <option value="Sialkot">Sialkot</option>
+                    <option value="Gujranwala">Gujranwala</option>
+                    <option value="Quetta">Quetta</option>
+                    <option value="Dubai">Dubai / Overseas</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Education</label>
+                <select id="filterEducation">
+                    <option value="Any">All Education</option>
+                    <optgroup label="Schooling">
+                        <option value="Primary">Primary</option>
+                        <option value="Middle">Middle</option>
+                        <option value="Matric / O-Levels">Matric / O-Levels</option>
+                        <option value="Intermediate / A-Levels">Intermediate / A-Levels</option>
+                    </optgroup>
+                    <optgroup label="Undergraduate">
+                        <option value="Diploma (DAE)">Diploma (DAE)</option>
+                        <option value="Bachelors">Bachelors (BA/BSc/B.Com)</option>
+                        <option value="BS (Hons)">BS (Hons) / 4-Year Degree</option>
+                    </optgroup>
+                    <optgroup label="Postgraduate">
+                        <option value="Masters">Masters (MA/MSc/M.Com)</option>
+                        <option value="MS / M.Phil">MS / M.Phil</option>
+                    </optgroup>
+                    <optgroup label="Doctorate">
+                        <option value="PhD / Doctorate">PhD / Doctorate</option>
+                    </optgroup>
+                    <optgroup label="Medical & Professional">
+                        <option value="MBBS">MBBS</option>
+                        <option value="BDS">BDS</option>
+                        <option value="MD">MD</option>
+                        <option value="DVM">DVM</option>
+                        <option value="Pharm-D">Pharm-D</option>
+                    </optgroup>
+                    <optgroup label="Finance/Accounts">
+                        <option value="CA">CA</option>
+                        <option value="ACCA">ACCA</option>
+                        <option value="ACMA">ACMA</option>
+                    </optgroup>
+                    <optgroup label="Religious">
+                        <option value="Alim / Alimah">Alim / Alimah</option>
+                        <option value="Hafiz-e-Quran">Hafiz-e-Quran</option>
+                    </optgroup>
+                </select>
+            </div>
+            <button id="applyFiltersBtn" class="btn-minimal btn-primary" style="width: 100%; border: none; cursor: pointer;">Search Again</button>
+        </aside>
+
+        <main>
+            <div class="profile-grid" id="profileGrid">
+                <!-- Profiles will be injected here via js/ui.js -->
+            </div>
+
+            <!-- No Results State -->
+            <div id="noResults" class="no-results-container" style="display: none; text-align: center; padding: 100px 20px;">
+                <i class="fas fa-search" style="font-size: 4rem; color: var(--accent); margin-bottom: 20px;"></i>
+                <h2 style="color: var(--primary); font-family: 'Playfair Display', serif; margin-bottom: 15px;">No Profiles Found</h2>
+                <p style="color: var(--text-muted); margin-bottom: 30px;">Try adjusting your filters to find more matches.</p>
+                <button id="clearFiltersBtn" class="btn-join-elite" style="margin: 0 auto; border: none; cursor: pointer; padding: 12px 35px;">Clear All Filters</button>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <img src="images/official_logo.png" class="footer-logo-large" alt="Haya Bureau Logo">
+                
+
+                
+                <ul class="footer-links">
+                    <li><a href="about.html">Privacy</a></li>
+                    <li><a href="about.html">Terms</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="about.html">Our Heritage</a></li>
+                </ul>
+
+                <div class="footer-socials">
+                    <a href="https://web.facebook.com/profile.php?id=61583555798844" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/hayamarriageebureau?igsh=eXlzOGR5bGh1YTY3" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/923134089228" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 Haya Marriage Bureau. Zenith of Matrimony.
+                </div>
+                
+                <div class="developer-signature" style="font-size: 13px; font-weight: 300; color: var(--accent);">
+                    Developed by: <a href="https://wa.me/923079661669" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 300;">Zargham Mustafa</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/923134089228" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script type="module" src="js/ui.js"></script>
+</body>
+</html>
