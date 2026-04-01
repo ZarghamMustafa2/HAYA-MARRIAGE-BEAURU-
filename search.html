@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -7,111 +7,98 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        .search-page { padding-top: 140px; background: var(--surface); min-height: 100vh; }
-        .search-sidebar { background: white; padding: 40px; border-radius: var(--radius-md); box-shadow: var(--shadow-soft); height: fit-content; position: sticky; top: 140px; }
-        .search-layout { display: grid; grid-template-columns: 350px 1fr; gap: 50px; }
+        .search-page-wrapper { padding-top: 140px; background: var(--surface); min-height: 100vh; }
+        .search-sidebar { background: white; padding: 40px; border-radius: 12px; box-shadow: var(--shadow-soft); height: fit-content; position: sticky; top: 140px; }
+        .search-layout { display: grid; grid-template-columns: 1fr; gap: 50px; }
         .filter-item { margin-bottom: 30px; }
         .filter-item label { display: block; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--primary); margin-bottom: 12px; letter-spacing: 1px; }
         .filter-item select { width: 100%; padding: 12px; border: none; border-bottom: 1px solid rgba(0,0,0,0.1); font-family: inherit; font-weight: 600; background: transparent; }
         @media (max-width: 1100px) { .search-layout { grid-template-columns: 1fr; } .search-sidebar { display: none; } }
     </style>
 </head>
-<body class="search-page">
-    <header class="luxury-header">
-        <div class="container header-inner">
-            <!-- Left: Contact Details -->
-            <div class="header-left">
+<body class="page-fade">
+    <div class="header-wrapper">
+        <!-- Thin Top Bar for Contact info -->
+        <div class="top-bar">
+            <div class="container">
                 <a href="mailto:hayamarriageebureau@gmail.com"><i class="fas fa-envelope"></i> hayamarriageebureau@gmail.com</a>
                 <a href="https://wa.me/923134089228"><i class="fab fa-whatsapp"></i> 0313-4089228</a>
             </div>
-
-            <!-- Center: Script Logo Only -->
-            <div class="header-center">
-                <a href="index.html" style="text-decoration: none;">
-                    <span class="logo-text-script">Hayamarriageebureau</span>
-                </a>
-            </div>
-
-            <!-- Right: Navigation & Pill Button -->
-            <div class="header-right">
-                <ul class="nav-links">
-                    <li><a href="index.html" class="nav-link">Home</a></li>
-                    <li><a href="profiles.html" class="nav-link active">Profiles</a></li>
-                    <li><a href="about.html" class="nav-link">Our Story</a></li>
-                    <li><a href="packages.html" class="nav-link">Membership</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-                <a href="register.html" class="btn-join-elite">Join the Elite</a>
-                <button class="mobile-toggle"><i class="fas fa-bars"></i></button>
-            </div>
         </div>
-    </header>
 
-    <!-- Mobile Nav Overlay -->
-    <div class="mobile-nav-overlay">
-        <i class="fas fa-times close-btn"></i>
-        <a href="index.html">Home</a>
-        <a href="profiles.html">Profiles</a>
-        <a href="about.html">Our Story</a>
-        <a href="packages.html">Membership</a>
-        <a href="contact.html">Contact</a>`n        <a href="register.html" style="color: var(--white); background: var(--accent); padding: 10px 20px; border-radius: 5px; text-align: center; margin-top: 20px;">Join the Elite</a>
+        <!-- Main Logo & Navigation Header -->
+        <header class="luxury-header">
+            <div class="container header-inner">
+                <div class="header-center">
+                    <a href="index.html" style="text-decoration: none;">
+                        <span class="logo-text-script">Haya Marriage Bureau</span>
+                    </a>
+                </div>
+                <div class="header-right">
+                    <a href="register.html" class="btn-join-elite">Join the Elite</a>
+                    <button class="mobile-toggle" aria-label="Open Menu" onclick="if(window.openMenu) window.openMenu();">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
     </div>
 
-    <div class="container search-layout">
-        <aside class="search-sidebar animate">
-            <h3 style="margin-bottom: 30px; font-size: 1.8rem; color: var(--primary);">Refine Discovery</h3>
-            <div class="filter-item">
-                <label>I am looking for</label>
-                <select><option>Bride</option><option>Groom</option></select>
-            </div>
-            <div class="filter-item">
-                <label>Age Preference</label>
-                <select><option>20 - 30</option><option>30 - 40</option><option>40+</option></select>
-            </div>
-            <div class="filter-item">
-                <label>Family Origin</label>
-                <input type="text" placeholder="e.g. Arain, Rajput" style="width: 100%; padding: 12px; border: none; border-bottom: 1px solid rgba(0,0,0,0.1); font-family: inherit;">
-            </div>
-            <button class="btn-minimal btn-primary" style="width: 100%; border: none; cursor: pointer; margin-top: 20px;">Apply Filters</button>
-        </aside>
+    <!-- Mobile Navigation Drawer -->
+    <div class="mobile-nav-backdrop"></div>
+    <div class="mobile-nav-overlay">
+        <i class="fas fa-times close-btn" onclick="if(window.closeMenu) window.closeMenu();"></i>
+        <div class="mobile-nav-links">
+            <a href="index.html">Home</a>
+            <a href="profiles.html">Profiles</a>
+            <a href="about.html">Our Story</a>
+            <a href="packages.html">Membership</a>
+            <a href="contact.html">Contact</a>
+            <a href="register.html" class="btn-join-elite btn-mobile-join">Join the Elite</a>
+        </div>
+        <div class="mobile-nav-signature">
+            Developed by: <a href="https://wa.me/923079661669" target="_blank">Zargham Mustafa</a>
+        </div>
+    </div>
 
-        <main>
-            <div class="section-title" style="text-align: left; margin-bottom: 40px;">
-                <h2 style="font-size: 2.5rem;">Verified Seekers</h2>
-                <p>Authentic connections, manually verified for excellence.</p>
-            </div>
+    <div class="search-page-wrapper">
+        <div class="container search-layout">
             
-            <div class="bento-grid" style="grid-template-columns: repeat(2, 1fr); padding: 0;">
-                <!-- Reusing card structure from index.html -->
-                <article class="profile-card animate">
-                    <div class="card-img-wrap"><div class="profile-img-bg" style="background-image: url('images/profiles/avatar_male.png');"></div></div>
-                    <h3>Zain Ahmed (31)</h3>
-                    <ul class="card-meta">
-                        <li><i class="fas fa-laptop-code"></i> Principal Software Architect</li>
-                        <li><i class="fas fa-map-marker-alt"></i> DHA, Karachi</li>
-                    </ul>
-                    <a href="profile-detail.html?name=Zain+Ahmed&age=31&city=Karachi&profession=Software+Architect&img=avatar_male.png" class="btn-card">View Profile</a>
-                </article>
-                <article class="profile-card animate">
-                    <div class="card-img-wrap"><div class="profile-img-bg" style="background-image: url('images/profiles/avatar_female.png');"></div></div>
-                    <h3>Dr. Ayesha Malik (25)</h3>
-                    <ul class="card-meta">
-                        <li><i class="fas fa-graduation-cap"></i> MBBS / Physician</li>
-                        <li><i class="fas fa-map-marker-alt"></i> Model Town, Lahore</li>
-                    </ul>
-                    <a href="profile-detail.html?name=Dr.+Ayesha+Malik&age=25&city=Lahore&profession=Doctor&img=avatar_female.png" class="btn-card">View Profile</a>
-                </article>
-                <!-- More items would be dynamically loaded here in a real app -->
-            </div>
-        </main>
+
+            <main class="animate-fade-in" style="animation-delay: 0.2s;">
+                <div class="section-title" style="text-align: left; margin-bottom: 40px;">
+                    <h2 style="font-size: 2.5rem; color: var(--primary);">Verified Seekers</h2>
+                    <p>Authentic connections, manually verified for excellence.</p>
+                </div>
+                
+                <div class="bento-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; padding: 0;">
+                    <article class="profile-card">
+                        <div class="card-img-wrap"><div class="profile-img-bg" style="background-image: url('images/profiles/avatar_male.png');"></div></div>
+                        <h3>Zain Ahmed (31)</h3>
+                        <ul class="card-meta">
+                            <li><i class="fas fa-laptop-code"></i> Principal Software Architect</li>
+                            <li><i class="fas fa-map-marker-alt"></i> DHA, Karachi</li>
+                        </ul>
+                        <a href="profile-detail.html?name=Zain+Ahmed&age=31&city=Karachi&profession=Software+Architect&img=avatar_male.png" class="btn-card">View Profile</a>
+                    </article>
+                    <article class="profile-card">
+                        <div class="card-img-wrap"><div class="profile-img-bg" style="background-image: url('images/profiles/avatar_female.png');"></div></div>
+                        <h3>Dr. Ayesha Malik (25)</h3>
+                        <ul class="card-meta">
+                            <li><i class="fas fa-graduation-cap"></i> MBBS / Physician</li>
+                            <li><i class="fas fa-map-marker-alt"></i> Model Town, Lahore</li>
+                        </ul>
+                        <a href="profile-detail.html?name=Dr.+Ayesha+Malik&age=25&city=Lahore&profession=Doctor&img=avatar_female.png" class="btn-card">View Profile</a>
+                    </article>
+                </div>
+            </main>
+        </div>
     </div>
 
     <footer>
         <div class="container">
             <div class="footer-grid">
                 <img src="images/official_logo.png" class="footer-logo-large" alt="Haya Bureau Logo">
-                
-
                 
                 <ul class="footer-links">
                     <li><a href="about.html">Privacy</a></li>
@@ -132,8 +119,8 @@
                     &copy; 2026 Haya Marriage Bureau. Zenith of Matrimony.
                 </div>
                 
-                <div class="developer-signature" style="font-size: 13px; font-weight: 300; color: var(--accent);">
-                    Developed by: <a href="https://wa.me/923079661669" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 300;">Zargham Mustafa</a>
+                <div class="developer-signature" style="font-size: 13px; font-weight: 300; color: #D4AF37 !important;">
+                    Developed by: <a href="https://wa.me/923079661669" target="_blank" style="color: #D4AF37 !important; text-decoration: none; font-weight: 700;">Zargham Mustafa</a>
                 </div>
             </div>
         </div>
@@ -143,6 +130,7 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <script src="js/ui.js"></script>
+    <script type="module" src="js/ui.js"></script>
 </body>
 </html>
+
