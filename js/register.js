@@ -70,12 +70,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     nextBtn.addEventListener('click', () => {
-        if (validateStep(currentStep)) {
-            if (currentStep < totalSteps) {
-                currentStep++;
-                updateUI();
-            }
-        }
+        // Capture Basic Data
+        const userName = document.getElementById('fullName').value || "Guest";
+        const userGender = document.getElementById('gender').value || "Not Specified";
+        
+        // Construct WhatsApp Message
+        const message = `Assalam-o-Alaikum, I am ${userName} (${userGender}). I want to start my journey to find a Rishta. Please guide me on the next steps.`;
+
+        // Immediate Redirect to WhatsApp
+        const waUrl = `https://wa.me/923079661669?text=${encodeURIComponent(message)}`;
+        window.location.href = waUrl;
     });
 
     prevBtn.addEventListener('click', () => {
