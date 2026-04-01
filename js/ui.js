@@ -10,11 +10,18 @@ const initUI = () => {
 
     const openMenu = () => {
         if(overlay) {
-            overlay.classList.add('active');
-            overlay.style.transform = 'translateX(0)';
-            overlay.style.pointerEvents = 'auto';
+            overlay.style.display = 'flex'; // Force display first
+            // Small timeout to allow display:flex to render before transitioning
+            setTimeout(() => {
+                overlay.classList.add('active');
+                overlay.style.transform = 'translateX(0)';
+                overlay.style.pointerEvents = 'auto';
+            }, 10);
         }
-        backdrops.forEach(b => b.classList.add('active'));
+        backdrops.forEach(b => {
+            b.style.display = 'block';
+            setTimeout(() => b.classList.add('active'), 10);
+        });
         document.body.style.overflow = 'hidden';
     };
 
@@ -23,8 +30,19 @@ const initUI = () => {
             overlay.classList.remove('active');
             overlay.style.transform = 'translateX(100%)';
             overlay.style.pointerEvents = 'none';
+            // Wait for transition to finish then hide completely
+            setTimeout(() => {
+                if (!overlay.classList.contains('active')) {
+                    overlay.style.display = 'none';
+                }
+            }, 350); 
         }
-        backdrops.forEach(b => b.classList.remove('active'));
+        backdrops.forEach(b => {
+            b.classList.remove('active');
+            setTimeout(() => {
+                if (!b.classList.contains('active')) b.style.display = 'none';
+            }, 350);
+        });
         document.body.style.overflow = '';
     };
 
@@ -33,7 +51,13 @@ const initUI = () => {
     backdrops.forEach(backdrop => backdrop.addEventListener('click', closeMenu));
 
     // Force hide on load just in case (optional, CSS handles this normally)
-    closeMenu();
+    if(overlay) {
+        overlay.style.transform = 'translateX(100%)';
+        overlay.style.display = 'none';
+    }
+    backdrops.forEach(b => {
+        b.style.display = 'none';
+    });
     
     // Make these globally accessible as a fallback if HTML onclicks are added
     window.openMenu = openMenu;
