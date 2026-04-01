@@ -172,10 +172,15 @@
             
             document.title = `${name} | Haya Marriage Bureau`;
 
+            const profile = {
+                id: params.get('id') || "001",
+                name: params.get('name') || "N/A",
+                gender: params.get('gender') || "N/A",
+                city: params.get('city') || "N/A"
+            };
+
             window.handleWhatsApp = (action) => {
-                const id = params.get('id') || 'N/A';
-                const gender = params.get('gender') || 'N/A';
-                const message = `Assalam-o-Alaikum, I am interested in this profile: ID: ${id}, Gender: ${gender}, City: ${city}. Action: ${action}.`;
+                const message = `Assalam-o-Alaikum, I am interested in this profile:\nName: ${profile.name}\nID: ${profile.id}\nGender: ${profile.gender}\nCity: ${profile.city}\nAction: ${action}.`;
                 window.open(`https://wa.me/923079661669?text=${encodeURIComponent(message)}`, '_blank');
             };
         });
