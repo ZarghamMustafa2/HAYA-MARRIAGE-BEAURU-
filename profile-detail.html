@@ -150,16 +150,23 @@
     </a>
 
     <script type="module" src="js/ui.js"></script>
-    <script>
+    <script type="module">
+        import hayaDB from './js/db.js';
+
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
-            const name = params.get('name') || 'Elite Member';
-            const age = params.get('age') || 'N/A';
-            const city = params.get('city') || 'Location Verified';
-            const education = params.get('education') || 'Verified Degree';
-            const profession = params.get('profession') || 'Distinguished Professional';
-            const caste = params.get('caste') || 'Confidential';
-            const img = params.get('img') || 'avatar_male.png';
+            const profileId = params.get('id');
+            const allProfiles = hayaDB.getProfiles();
+            const dbProfile = allProfiles.find(p => p.id === profileId);
+
+            const name = dbProfile?.name || params.get('name') || 'Elite Member';
+            const age = dbProfile?.age || params.get('age') || 'N/A';
+            const city = dbProfile?.city || params.get('city') || 'Location Verified';
+            const education = dbProfile?.education || params.get('education') || 'Verified Degree';
+            const profession = dbProfile?.profession || dbProfile?.education || params.get('profession') || 'Distinguished Professional';
+            const caste = dbProfile?.caste || params.get('caste') || 'Confidential';
+            const gender = dbProfile?.gender || params.get('gender') || 'N/A';
+            const img = params.get('img') || (dbProfile?.gender?.toLowerCase() === 'female' ? 'avatar_female.png' : 'avatar_male.png');
 
             document.getElementById('detailName').textContent = name;
             document.getElementById('detailAge').textContent = age;
@@ -173,10 +180,10 @@
             document.title = `${name} | Haya Marriage Bureau`;
 
             const profile = {
-                id: params.get('id') || "001",
-                name: params.get('name') || "N/A",
-                gender: params.get('gender') || "N/A",
-                city: params.get('city') || "N/A"
+                id: profileId || "001",
+                name: name,
+                gender: gender,
+                city: city
             };
 
             window.handleWhatsApp = (action) => {
