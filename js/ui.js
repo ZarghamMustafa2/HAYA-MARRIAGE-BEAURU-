@@ -113,7 +113,7 @@ initUI();
                 </ul>
                 <div class="card-footer" style="width: 100%; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 20px;">
                     <a href="https://wa.me/923134089228" target="_blank" class="btn-card" style="background: #D4AF37; color: #4d0000 !important; font-weight: 800; border-radius: 50px; padding: 12px; display: block; text-decoration: none;">Interest Shared</a>
-                    <a href="profile-detail.html?id=${p.id}" style="color: #FFFDF5; font-size: 0.85rem; margin-top: 10px; display: block; text-decoration: underline; opacity: 0.7;">View Details</a>
+                    <a href="profile-detail.html?id=${p.id}&gender=${p.gender}&name=${encodeURIComponent(p.name)}&age=${p.age}&city=${encodeURIComponent(p.city)}&profession=${encodeURIComponent(p.education)}&img=${p.gender.toLowerCase() === 'male' ? 'avatar_male.png' : 'avatar_female.png'}" style="color: #FFFDF5; font-size: 0.85rem; margin-top: 10px; display: block; text-decoration: underline; opacity: 0.7;">View Details</a>
                 </div>
             `;
             grid.appendChild(card);
@@ -245,7 +245,7 @@ initUI();
                                 <li><i class="fas fa-graduation-cap" style="color: var(--accent);"></i> ${p.education}</li>
                                 <li><i class="fas fa-mosque" style="color: var(--accent);"></i> ${p.sect}</li>
                             </ul>
-                            <a href="profile-detail.html?name=${encodeURIComponent(p.name)}&age=${p.age}&city=${encodeURIComponent(p.city)}&profession=${encodeURIComponent(p.education)}&img=${p.gender.toLowerCase() === 'male' ? 'avatar_male.png' : 'avatar_female.png'}" 
+                            <a href="profile-detail.html?id=${p.id}&gender=${p.gender}&name=${encodeURIComponent(p.name)}&age=${p.age}&city=${encodeURIComponent(p.city)}&profession=${encodeURIComponent(p.education)}&img=${p.gender.toLowerCase() === 'male' ? 'avatar_male.png' : 'avatar_female.png'}" 
                                style="display: block; padding: 12px; background: var(--accent); color: var(--primary); font-weight: 800; text-decoration: none; border-radius: 10px; width: 90%; margin: auto;">View Full Profile</a>
                         </article>
                     `}).join('')}

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -66,8 +66,8 @@
                 <h1 id="detailName" style="color: var(--primary); font-size: 2.2rem; margin-bottom: 10px;">User Name</h1>
                 <p id="detailTagline" style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Professional Title</p>
                 <div style="display: flex; flex-direction: column; gap: 15px;">
-                    <button class="btn-minimal btn-primary" style="width: 100%; border: none; cursor: pointer;">Express Interest</button>
-                    <button class="btn-minimal" style="width: 100%; border: 2px solid var(--accent); color: var(--primary); cursor: pointer; font-weight: 700;">Request Photo</button>
+                    <button onclick="handleWhatsApp('Show Interest')" class="btn-minimal btn-primary" style="width: 100%; border: none; cursor: pointer;">Express Interest</button>
+                    <button onclick="handleWhatsApp('Request Photo')" class="btn-minimal" style="width: 100%; border: 2px solid var(--accent); color: var(--primary); cursor: pointer; font-weight: 700;">Request Photo</button>
                 </div>
                 <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid rgba(0,0,0,0.05);">
                     <div style="background: rgba(212, 175, 55, 0.1); color: var(--primary); padding: 10px; border-radius: 8px; font-size: 0.8rem; font-weight: 800;">
@@ -171,6 +171,13 @@
             document.getElementById('detailImg').src = `images/profiles/${img}`;
             
             document.title = `${name} | Haya Marriage Bureau`;
+
+            window.handleWhatsApp = (action) => {
+                const id = params.get('id') || 'N/A';
+                const gender = params.get('gender') || 'N/A';
+                const message = `Assalam-o-Alaikum, I am interested in this profile: ID: ${id}, Gender: ${gender}, City: ${city}. Action: ${action}.`;
+                window.open(`https://wa.me/923079661669?text=${encodeURIComponent(message)}`, '_blank');
+            };
         });
     </script>
 </body>
