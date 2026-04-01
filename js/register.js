@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    form.addEventListener('submit', async (e) => {
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
         
         if (!validateStep(currentStep)) return;
@@ -94,48 +94,21 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Finalizing Registration...';
 
         // Collect Form Data
-        const formData = {
-            name: document.getElementById('fullName').value,
-            email: document.getElementById('email').value,
-            phone: document.getElementById('phone').value,
-            cnic: document.getElementById('cnic').value,
-            age: parseInt(document.getElementById('age').value),
-            gender: document.getElementById('gender').value.toLowerCase(),
-            city: document.getElementById('city').value,
-            sect: document.getElementById('sect').value,
-            education: document.getElementById('education').value,
-            profession: document.getElementById('profession').value,
-            income: document.getElementById('income').value,
-            password: 'user123' // Mock password for simulation
-        };
+        const userName = document.getElementById('fullName').value;
+        const userPackage = document.getElementById('selectedPackage').value;
+        const userPhone = document.getElementById('phone').value;
+        
+        // Construct WhatsApp Message
+        const message = `New Membership Request:
+Name: ${userName}
+Selected Package: ${userPackage}
+Phone: ${userPhone}
+Note: Customer will share the payment screenshot/picture in this chat.`;
 
-        try {
-            // Register as User
-            const user = hayaDB.signup({
-                name: formData.name,
-                email: formData.email,
-                password: formData.password
-            });
-
-            // Create Profile in Pending State
-            hayaDB.addProfile({
-                ...formData,
-                status: 'pending',
-                joined: new Date().toISOString().split('T')[0],
-                image: 'images/profiles/avatar_placeholder.png'
-            });
-
-            console.log('Registration Successful:', user);
-            
-            // Redirect after delay for "premium" feel
-            setTimeout(() => {
-                window.location.href = 'dashboard.html';
-            }, 2000);
-
-        } catch (error) {
-            console.error('Registration failed:', error);
-            submitBtn.innerHTML = 'Error. Try Again';
-            submitBtn.disabled = false;
-        }
+        // Redirect after delay for "premium" feel
+        setTimeout(() => {
+            const waUrl = `https://wa.me/923079661669?text=${encodeURIComponent(message)}`;
+            window.location.href = waUrl;
+        }, 1500);
     });
 });
