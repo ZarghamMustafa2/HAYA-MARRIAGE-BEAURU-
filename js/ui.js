@@ -83,7 +83,7 @@ initUI();
                     <p style="color: #666; margin-bottom: 30px; font-size: 1.1rem;">Our elite database is updated daily. Try broadening your search or view all profiles.</p>
                     <button onclick="window.location.href='profiles.html';" class="btn-primary" style="padding: 15px 40px; border-radius: 50px;">View All Profiles</button>
                     <div style="margin-top: 20px;">
-                        <a href="https://wa.me/923134089228" target="_blank" style="color: #D4AF37; text-decoration: none; font-weight: 700;">Contact our consultant via WhatsApp</a>
+                        <a href="https://wa.me/923706462317" target="_blank" style="color: #D4AF37; text-decoration: none; font-weight: 700;">Contact our consultant via WhatsApp</a>
                     </div>
                 </div>
             `;
@@ -112,7 +112,7 @@ initUI();
                     <li><i class="fas fa-mosque"></i> ${p.sect}</li>
                 </ul>
                 <div class="card-footer" style="width: 100%; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 20px;">
-                    <a href="https://wa.me/923134089228" target="_blank" class="btn-card" style="background: #D4AF37; color: #4d0000 !important; font-weight: 800; border-radius: 50px; padding: 12px; display: block; text-decoration: none;">Interest Shared</a>
+                    <a href="https://wa.me/923706462317" target="_blank" class="btn-card" style="background: #D4AF37; color: #4d0000 !important; font-weight: 800; border-radius: 50px; padding: 12px; display: block; text-decoration: none;">Interest Shared</a>
                     <a href="profile-detail.html?id=${p.id}&gender=${p.gender}&name=${encodeURIComponent(p.name)}&age=${p.age}&city=${encodeURIComponent(p.city)}&profession=${encodeURIComponent(p.education)}&img=${p.gender.toLowerCase() === 'male' ? 'avatar_male.png' : 'avatar_female.png'}" style="color: #FFFDF5; font-size: 0.85rem; margin-top: 10px; display: block; text-decoration: underline; opacity: 0.7;">View Details</a>
                 </div>
             `;
@@ -261,7 +261,7 @@ initUI();
                     <i class="fas fa-search-minus" style="font-size: 4rem; color: var(--accent); margin-bottom: 20px;"></i>
                     <h3 style="color: var(--primary); font-family: 'Playfair Display', serif; font-size: 2.2rem; margin-bottom: 15px;">No exact matches found.</h3>
                     <p style="color: #666; font-size: 1.1rem; margin-bottom: 25px;">Please contact our consultant for personalized assistance.</p>
-                    <a href="https://wa.me/923134089228" target="_blank" class="btn-primary" style="padding: 15px 40px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: 800;">Chat on WhatsApp</a>
+                    <a href="https://wa.me/923706462317" target="_blank" class="btn-primary" style="padding: 15px 40px; border-radius: 50px; text-decoration: none; display: inline-block; font-weight: 800;">Chat on WhatsApp</a>
                 </div>
             `;
         }
