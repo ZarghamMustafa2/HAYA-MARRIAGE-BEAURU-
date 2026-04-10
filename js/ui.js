@@ -1,5 +1,19 @@
 import hayaDB from './db.js';
 
+window.handleWhatsApp = (profile, action) => {
+    const message = `Assalam-o-Alaikum, I am interested in this profile:
+Name: ${profile.name}
+ID: ${profile.id}
+Gender: ${profile.gender}
+Age: ${profile.age}
+City: ${profile.city}
+Action: ${action}`;
+    
+    const waUrl = `https://wa.me/923706462317?text=${encodeURIComponent(message)}`;
+    window.open(waUrl, '_blank');
+};
+
+
 // Run immediately since this is a module script and DOMContentLoaded might have already fired
 const initUI = () => {
     // --- Mobile Menu Toggle Logic ---
@@ -112,7 +126,7 @@ initUI();
                     <li><i class="fas fa-mosque"></i> ${p.sect}</li>
                 </ul>
                 <div class="card-footer" style="width: 100%; border-top: 1px solid rgba(212, 175, 55, 0.2); padding-top: 20px;">
-                    <a href="https://wa.me/923706462317" target="_blank" class="btn-card" style="background: #D4AF37; color: #4d0000 !important; font-weight: 800; border-radius: 50px; padding: 12px; display: block; text-decoration: none;">Interest Shared</a>
+                    <button onclick='handleWhatsApp(${JSON.stringify(p).replace(/'/g, "&apos;")}, "Express Interest")' class="btn-card" style="background: #D4AF37; color: #4d0000 !important; font-weight: 800; border-radius: 50px; padding: 12px; display: block; text-decoration: none; width: 100%; border: none; cursor: pointer;">Express Interest</button>
                     <a href="profile-detail.html?id=${p.id}&gender=${p.gender}&name=${encodeURIComponent(p.name)}&age=${p.age}&city=${encodeURIComponent(p.city)}&profession=${encodeURIComponent(p.education)}&img=${p.gender.toLowerCase() === 'male' ? 'avatar_male.png' : 'avatar_female.png'}" style="color: #FFFDF5; font-size: 0.85rem; margin-top: 10px; display: block; text-decoration: underline; opacity: 0.7;">View Details</a>
                 </div>
             `;
