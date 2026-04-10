@@ -79,6 +79,13 @@ class MarriageBureauDB {
         return p ? JSON.parse(p) : allProfiles;
     }
 
+    addProfile(profileData) {
+        const profiles = this.getProfiles();
+        profiles.push(profileData);
+        localStorage.setItem('haya_profiles', JSON.stringify(profiles));
+        return true;
+    }
+
     searchProfiles(filters = {}) {
         let profiles = this.getProfiles();
 
