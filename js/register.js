@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const message = `Assalam-o-Alaikum, I am ${userName} (${userGender}). I want to start my journey to find a Rishta. Please guide me on the next steps.`;
 
         // Immediate Redirect to WhatsApp
-        const waUrl = `https://wa.me/923079661669?text=${encodeURIComponent(message)}`;
+        const waUrl = `https://wa.me/923706462317?text=${encodeURIComponent(message)}`;
         window.location.href = waUrl;
     });
 
@@ -111,7 +111,7 @@ Note: Customer will share the payment screenshot/picture in this chat.`;
 
         // Redirect after delay for "premium" feel
         setTimeout(() => {
-            const waUrl = `https://wa.me/923079661669?text=${encodeURIComponent(message)}`;
+            const waUrl = `https://wa.me/923706462317?text=${encodeURIComponent(message)}`;
             window.location.href = waUrl;
         }, 1500);
     });
