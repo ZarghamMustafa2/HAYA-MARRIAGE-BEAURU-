@@ -350,9 +350,8 @@
             </div>
 
             <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
-                <!-- Web3Forms Specific Fields -->
+                <!-- Critical: Using EXACT Access Key provided with NO spaces -->
                 <input type="hidden" name="access_key" value="44866946-a4c3-421f-8980-6060c410317e">
-                <input type="hidden" name="apikey" value="44866946-a4c3-421f-8980-6060c410317e">
                 <input type="hidden" name="subject" id="formSubject" value="New Highly Confidential Registration - Haya Bureau">
                 <input type="hidden" name="from_name" value="Haya Marriage Bureau Application">
                 
@@ -413,14 +412,14 @@
                             <option value="Khula">Khula</option>
                         </select>
                     </div>
-                    <!-- New Contact Fields -->
+                    <!-- Required Telephone Fields -->
                     <div class="input-group">
-                        <label>Contact Number for Calling</label>
-                        <input type="tel" name="Candidate_Call_Number" placeholder="e.g. 03201234567" required>
+                        <label>Call Number</label>
+                        <input type="tel" name="Candidate_Call_Number" placeholder="Contact number for calling" required>
                     </div>
                     <div class="input-group">
                         <label>WhatsApp Number</label>
-                        <input type="tel" name="Candidate_WhatsApp_Number" placeholder="e.g. 03201234567" required>
+                        <input type="tel" name="Candidate_WhatsApp_Number" placeholder="WhatsApp number" required>
                     </div>
                 </div>
 
@@ -520,7 +519,7 @@
         <div class="success-content">
             <i class="fas fa-check-circle"></i>
             <h2>Application Received!</h2>
-            <p>Assalam-o-Alaikum, Your Registration has been successfully submitted via Web3Forms Secure Delivery.<br>Our team will verify the payment and profile details and contact you soon.</p>
+            <p>Assalam-o-Alaikum, Your Application has been Submitted.<br>Our team will verify and contact you soon.</p>
             <button class="btn-submit" onclick="window.location.href='index.html'" style="background: var(--accent-gold); color: var(--primary-maroon);">Back to Home</button>
         </div>
     </div>
@@ -555,9 +554,9 @@
             const fileName = input.files[0] ? input.files[0].name : "";
             const sizeInMB = input.files[0] ? input.files[0].size / (1024 * 1024) : 0;
             
-            // Limit to 4MB per file to stay within Web3Forms total limits and avoid network failures
+            // Web3Forms limit safety check
             if (sizeInMB > 4) {
-                alert("File is too large! Please upload a file smaller than 4MB. Large files cause network failures.");
+                alert("File is too large! Please upload a file smaller than 4MB.");
                 input.value = "";
                 input.parentElement.querySelector('.file-name').textContent = "";
                 return;
@@ -577,24 +576,13 @@
             // Update Dynamic Subject
             document.getElementById('formSubject').value = `New Registration: ${candidateName} - Fee Paid`;
 
-            // 1. UI Feedback: Start Processing
+            // UI Feedback
             btn.disabled = true;
             if (loader) loader.style.display = 'inline-block';
             btn.innerHTML = 'VERIFYING... <div class="loader" style="display:inline-block"></div>';
 
             const formData = new FormData(form);
-            const dataObj = Object.fromEntries(formData.entries());
 
-            // 2. Backup Logic: Save to LocalStorage immediately
-            try {
-                const existingBackups = JSON.parse(localStorage.getItem('haya_form_backups') || '[]');
-                existingBackups.push({ timestamp: new Date().toISOString(), data: dataObj, provider: 'web3forms' });
-                localStorage.setItem('haya_form_backups', JSON.stringify(existingBackups));
-            } catch (err) {
-                console.error('Local backup failed:', err);
-            }
-
-            // 3. Main Submission via Web3Forms API
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -604,23 +592,21 @@
             })
             .then(async (response) => {
                 const result = await response.json();
-                console.log('📦 Web3Forms API Response:', response.status, result);
+                console.log('API Response:', response.status, result);
                 
                 if (response.status === 200 && result.success) {
-                    // SUCCESS
                     form.reset();
                     document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
                     overlay.style.display = 'flex';
                 } else {
-                    // API ERROR
-                    console.error('⚠️ API Failure:', result);
-                    alert("Submission failed: " + (result.message || "Unknown error occurred."));
+                    console.error('API Error:', result);
+                    alert("Submission failed: " + (result.message || "Invalid Access Key or Server Error."));
                     resetSubmitButton();
                 }
             })
             .catch(error => {
-                console.log('❌ Network Catch Error:', error);
-                alert("Network failure. Files might be too large. Please try with smaller images (max 4MB each) or check your connection.");
+                console.log('Network Error:', error);
+                alert("Network failure. Please check your connection and ensure files are small (max 4MB).");
                 resetSubmitButton();
             });
 
