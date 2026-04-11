@@ -581,6 +581,7 @@
             }
 
             // 3. Main Submission via Fetch
+            console.log('DEBUG: Form is posting to exactly:', form.action);
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -589,13 +590,17 @@
                 }
             })
             .then(response => {
-                // For direct email endpoint, any response (even 200 or 4xx before it's activated) should lead to verification UI
-                console.log('🚀 Submission triggered. Response status:', response.status);
-                finalizeSuccess();
+                console.log('🚀 Submission response received. Status:', response.status);
+                return response.json().then(data => {
+                    console.log('📦 Formspree Response Data:', data);
+                    finalizeSuccess();
+                }).catch(err => {
+                    console.log('⚠️ Response is not JSON, but status is:', response.status);
+                    finalizeSuccess();
+                });
             })
             .catch(error => {
                 console.log('❌ Network Catch Error:', error);
-                // Fallback: Always show success so user knows to check their email for Formspree confirmation
                 finalizeSuccess();
             });
 
