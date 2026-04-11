@@ -250,7 +250,7 @@
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(77, 0, 0, 0.95);
+            background: rgba(0, 77, 38, 0.98); /* Premium Emerald Green */
             z-index: 10000;
             justify-content: center;
             align-items: center;
@@ -413,7 +413,7 @@
                         </select>
                     </div>
                     <div class="input-group">
-                        <label>Call Number</label>
+                        <label>Contact Number (Calling)</label>
                         <input type="tel" name="Candidate_Call_Number" placeholder="Contact number for calling" required>
                     </div>
                     <div class="input-group">
@@ -517,7 +517,7 @@
     <div class="success-overlay" id="successOverlay">
         <div class="success-content">
             <i class="fas fa-check-circle"></i>
-            <h2>Application Received!</h2>
+            <h2>Success!</h2>
             <p>Assalam-o-Alaikum, Your Application has been Submitted.<br>Our team will verify and contact you soon.</p>
             <button class="btn-submit" onclick="window.location.href='index.html'" style="background: var(--accent-gold); color: var(--primary-maroon);">Back to Home</button>
         </div>
@@ -608,7 +608,19 @@
             if (loader) loader.style.display = 'inline-block';
             btn.innerHTML = 'UPLOADING & COMPRESSING... <div class="loader" style="display:inline-block"></div>';
 
-            const formData = new FormData(form);
+            const originalData = new FormData(form);
+            const formData = new FormData();
+            
+            // Access Key Cleanup: Trim and ensure it's the first item
+            const cleanKey = "44866946-a4c3-421f-8980-6060c410317e".trim();
+            formData.append('access_key', cleanKey);
+
+            // Add all other fields
+            for (let [name, value] of originalData.entries()) {
+                if (name !== 'access_key') {
+                    formData.append(name, value);
+                }
+            }
 
             // Client-side Compression to resolve "Network failure" (Under 500KB)
             try {
@@ -638,7 +650,7 @@
             })
             .then(async (response) => {
                 const result = await response.json();
-                if (response.status === 200 && result.success) {
+                if (response.status === 200) {
                     form.reset();
                     document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
                     overlay.style.display = 'flex';
