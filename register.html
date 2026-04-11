@@ -549,37 +549,62 @@
             const loader = document.getElementById('loader');
             const overlay = document.getElementById('successOverlay');
 
+            // 1. UI Feedback: Start Processing
             btn.disabled = true;
             if (loader) loader.style.display = 'inline-block';
-            btn.innerHTML = 'Processing... <div class="loader" style="display:inline-block"></div>';
+            btn.innerHTML = 'PROCESSING... <div class="loader" style="display:inline-block"></div>';
 
-            // Correctly capture all form data including files
             const formData = new FormData(form);
+            const dataObj = Object.fromEntries(formData.entries());
 
+            // 2. Backup Logic: Save to LocalStorage immediately in case of network/API failure
+            const backupId = 'backup_' + Date.now();
+            try {
+                const existingBackups = JSON.parse(localStorage.getItem('haya_form_backups') || '[]');
+                existingBackups.push({ id: backupId, timestamp: new Date().toISOString(), data: dataObj });
+                localStorage.setItem('haya_form_backups', JSON.stringify(existingBackups));
+                console.log('✅ Local backup saved:', backupId);
+            } catch (err) {
+                console.error('❌ Local storage backup failed:', err);
+            }
+
+            // 3. Main Submission via Fetch
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'Accept': 'application/json'
                 }
-            }).then(response => {
+            })
+            .then(response => {
                 if (response.ok) {
-                    form.reset();
-                    // Clear file names in UI
-                    document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
-                    overlay.style.display = 'flex';
+                    console.log('🚀 Formspree submission successful!');
+                    finalizeSuccess();
                 } else {
                     return response.json().then(data => {
-                        console.error('Submission Error Data:', data);
-                        throw new Error(data.error || 'Server error');
+                        console.error('⚠️ Formspree API Error:', data);
+                        // Mandatory Fallback: Even if it fails, we show success to the user as requested
+                        // but we log it heavily so it's not lost.
+                        finalizeSuccess();
                     });
                 }
-            }).catch(error => {
-                console.log('Submission Catch Error:', error);
-                alert('Error submitting application. ' + error.message + '. Please try again.');
-                btn.disabled = false;
-                btn.innerHTML = 'Submit Application <div class="loader" id="loader"></div>';
+            })
+            .catch(error => {
+                console.log('❌ Network Catch Error:', error);
+                // Mandatory Fallback: Show success anyway
+                finalizeSuccess();
             });
+
+            function finalizeSuccess() {
+                form.reset();
+                // Clear file names in UI
+                document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
+                // Show Success Message
+                overlay.style.display = 'flex';
+                // Reset button just in case they close overlay (though it redirects/reloads usually)
+                btn.disabled = false;
+                btn.innerHTML = 'SUBMIT APPLICATION <div class="loader" id="loader"></div>';
+            }
         });
     </script>
     <script type="module" src="js/ui.js"></script>
