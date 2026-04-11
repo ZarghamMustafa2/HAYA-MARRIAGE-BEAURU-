@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Application Form | Haya Marriage Bureau</title>
+    <title>Quick Registration | Haya Marriage Bureau</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-maroon: #4d0000;
@@ -14,7 +14,7 @@
             --cream-bg: #FFFDF5;
             --white: #ffffff;
             --text-dark: #1a0000;
-            --gold-light: #f2d480;
+            --success-green: #004d26;
         }
 
         body {
@@ -26,28 +26,20 @@
         }
 
         .auth-container {
-            padding: 180px 20px 100px;
+            padding: 150px 20px 100px;
             background: linear-gradient(135deg, #4d0000 0%, #1a0000 100%);
-            position: relative;
-            overflow: hidden;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-        }
-
-        .auth-container::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/gold-dust.png');
-            opacity: 0.1;
+            align-items: flex-start;
         }
 
         .register-card {
             background: var(--white);
             border-radius: 30px;
             width: 100%;
-            max-width: 1000px;
-            padding: 60px;
+            max-width: 800px;
+            padding: 50px;
             position: relative;
             z-index: 2;
             box-shadow: 0 40px 100px rgba(0,0,0,0.4);
@@ -62,65 +54,30 @@
 
         .form-header {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 40px;
         }
 
         .form-header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             color: var(--primary-maroon);
-            margin-bottom: 10px;
-            letter-spacing: -1px;
-        }
-
-        .form-header p {
-            color: var(--accent-gold);
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-        }
-
-        .fee-banner {
-            background: var(--primary-maroon);
-            color: var(--accent-gold);
-            padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-            margin-bottom: 50px;
-            border: 2px solid var(--accent-gold);
-            box-shadow: 0 10px 30px rgba(77, 0, 0, 0.2);
-        }
-
-        .fee-banner h2 {
-            margin: 0;
-            font-family: 'Playfair Display', serif;
-            font-size: 2rem;
-        }
-
-        .fee-banner p {
-            margin: 10px 0 0;
-            font-weight: 600;
-            opacity: 0.9;
+            margin: 0 0 10px;
         }
 
         .section-title {
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             color: var(--primary-maroon);
-            margin: 50px 0 30px;
-            padding-left: 20px;
-            border-left: 4px solid var(--accent-gold);
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent-gold);
             display: block;
-            background: linear-gradient(to right, rgba(212, 175, 55, 0.05), transparent);
-            padding: 10px 20px;
-            border-radius: 0 10px 10px 0;
         }
 
         .form-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 25px 40px;
+            gap: 20px 30px;
         }
 
         .input-group {
@@ -135,89 +92,48 @@
             color: var(--primary-maroon);
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding-left: 5px;
         }
 
-        .input-group input, .input-group select, .input-group textarea {
-            padding: 16px 20px;
+        .input-group input {
+            padding: 14px 18px;
             border-radius: 12px;
             border: 1.5px solid rgba(77, 0, 0, 0.1);
             background: #fafafa;
             font-family: inherit;
             font-size: 1rem;
             transition: all 0.3s ease;
-            color: var(--text-dark);
         }
 
-        .input-group input:focus, .input-group select:focus {
+        .input-group input:focus {
             outline: none;
             border-color: var(--accent-gold);
             background: white;
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .file-input-wrapper {
-            position: relative;
-            background: #fff;
-            border: 2px dashed rgba(212, 175, 55, 0.4);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .file-input-wrapper:hover {
-            border-color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.03);
-        }
-
-        .file-input-wrapper i {
-            font-size: 2rem;
-            color: var(--accent-gold);
-            margin-bottom: 10px;
-        }
-
-        .file-input-wrapper input {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .full-width {
-            grid-column: 1 / -1;
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
         }
 
         .submit-section {
-            margin-top: 80px;
+            margin-top: 50px;
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
-            padding-top: 50px;
         }
 
         .btn-submit {
             background: linear-gradient(135deg, var(--primary-maroon), #800000);
             color: var(--accent-gold);
-            padding: 22px 80px;
+            padding: 20px 60px;
             border-radius: 50px;
             border: 2px solid var(--accent-gold);
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 15px 35px rgba(77, 0, 0, 0.3);
+            transition: all 0.3s ease;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .btn-submit:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px rgba(77, 0, 0, 0.4);
-            background: var(--primary-maroon);
-            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(77, 0, 0, 0.3);
         }
 
         .btn-submit:disabled {
@@ -225,32 +141,13 @@
             border-color: #999;
             color: #666;
             cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
         }
 
-        .loader {
-            display: none;
-            width: 20px;
-            height: 20px;
-            border: 3px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: #fff;
-            animation: spin 1s ease-in-out infinite;
-            margin-left: 10px;
-            vertical-align: middle;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Success Message Overlay */
         .success-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 77, 38, 0.98); /* Premium Emerald Green */
+            background: rgba(0, 77, 38, 0.98);
             z-index: 10000;
             justify-content: center;
             align-items: center;
@@ -264,45 +161,24 @@
             animation: slideInUp 0.6s ease;
         }
 
+        .success-content i { font-size: 4rem; margin-bottom: 20px; }
+        .success-content h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 15px; }
+        .success-content p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 30px; }
+
         @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .success-content i {
-            font-size: 5rem;
-            margin-bottom: 30px;
-        }
-
-        .success-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .success-content p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .register-card { padding: 40px 20px; }
+        @media (max-width: 650px) {
             .form-grid { grid-template-columns: 1fr; }
-            .form-header h1 { font-size: 2.5rem; }
-            .auth-container { padding-top: 140px; }
+            .register-card { padding: 30px 20px; }
+            .form-header h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
     <div class="header-wrapper">
-        <div class="top-bar">
-            <div class="container">
-                <a href="mailto:hayamarriageebureau@gmail.com"><i class="fas fa-envelope"></i> hayamarriageebureau@gmail.com</a>
-                <a href="https://wa.me/923706462317"><i class="fab fa-whatsapp"></i> 0370-6462317</a>
-            </div>
-        </div>
-
         <header class="luxury-header">
             <div class="container header-inner">
                 <div class="header-center">
@@ -310,204 +186,64 @@
                         <span class="logo-text-script">Haya Marriage Bureau</span>
                     </a>
                 </div>
-                <div class="header-right">
-                    <button class="mobile-toggle" aria-label="Open Menu" onclick="if(window.openMenu) window.openMenu();">
-                        <i class="fas fa-bars"></i>
-                    </button>
-                </div>
             </div>
         </header>
-    </div>
-
-    <div class="mobile-nav-backdrop"></div>
-    <div class="mobile-nav-overlay">
-        <i class="fas fa-times close-btn" onclick="if(window.closeMenu) window.closeMenu();"></i>
-        <div class="mobile-nav-links">
-            <a href="index.html">Home</a>
-            <a href="profiles.html">Profiles</a>
-            <a href="register.html" class="active">Register Now</a>
-            <a href="about.html">Our Story</a>
-            <a href="packages.html">Membership</a>
-            <a href="contact.html">Contact</a>
-        </div>
-        <div class="mobile-nav-signature">
-            Developed by: <a href="https://wa.me/923079661669" target="_blank">Zargham Mustafa</a>
-        </div>
     </div>
 
     <main class="auth-container">
         <div class="register-card">
             <div class="form-header">
-                <p>Private & Confidential</p>
-                <h1>Registration Form</h1>
-                <div style="width: 100px; height: 3px; background: var(--accent-gold); margin: 0 auto;"></div>
+                <p style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; font-weight: 700; font-size: 0.8rem;">Private Registration</p>
+                <h1>Application Form</h1>
+                <div style="width: 60px; height: 2px; background: var(--accent-gold); margin: 15px auto;"></div>
             </div>
 
-            <div class="fee-banner">
-                <h2>Registration Fee: Rs. 3,000</h2>
-                <p><i class="fas fa-university"></i> JazzCash Number: <strong>03207524063</strong></p>
-                <p style="font-size: 0.85rem; margin-top: 10px;">Please upload the payment screenshot below to process your application.</p>
-            </div>
-
-            <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
-                <!-- Web3Forms Access Key: 44866946-a4c3-421f-8980-6060c410317e -->
+            <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST">
+                <!-- Web3Forms Access Key -->
                 <input type="hidden" name="access_key" value="44866946-a4c3-421f-8980-6060c410317e">
-                <input type="hidden" name="subject" id="formSubject" value="New Highly Confidential Registration - Haya Bureau">
-                <input type="hidden" name="from_name" value="Haya Marriage Bureau Application">
+                <input type="hidden" name="subject" value="New Bureau Registration - Quick Form">
+                <input type="hidden" name="from_name" value="Haya Marriage Bureau">
                 
-                <!-- Personal Details -->
                 <div class="section-title">Personal Details</div>
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Candidate Full Name</label>
-                        <input type="text" name="Candidate_Name" id="candidateNameInput" placeholder="As per CNIC" required>
+                        <input type="text" name="Candidate_Name" placeholder="Enter Full Name" required>
                     </div>
                     <div class="input-group">
                         <label>Father's Name</label>
-                        <input type="text" name="Candidate_Father_Name" required>
+                        <input type="text" name="Father_Name" placeholder="Enter Father's Name" required>
                     </div>
                     <div class="input-group">
                         <label>Age</label>
-                        <input type="number" name="Candidate_Age" min="18" max="70" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Height</label>
-                        <input type="text" name="Candidate_Height" placeholder="e.g. 5' 6\" required>
+                        <input type="number" name="Age" min="18" max="75" placeholder="Enter Age" required>
                     </div>
                     <div class="input-group">
                         <label>Caste</label>
-                        <input type="text" name="Candidate_Caste" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Sect</label>
-                        <select name="Candidate_Sect" required>
-                            <option value="" disabled selected>Select Sect</option>
-                            <option value="Sunni">Sunni</option>
-                            <option value="Shia">Shia</option>
-                            <option value="Wahhabi">Wahhabi</option>
-                            <option value="Barelvi">Barelvi</option>
-                            <option value="Deobandi">Deobandi</option>
-                            <option value="Ahl-e-Hadith">Ahl-e-Hadith</option>
-                            <option value="Other">Other</option>
-                        </select>
+                        <input type="text" name="Caste" placeholder="Enter Caste" required>
                     </div>
                     <div class="input-group">
                         <label>Education</label>
-                        <input type="text" name="Candidate_Education" placeholder="Last Degree / Qualification" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Profession</label>
-                        <input type="text" name="Candidate_Profession" placeholder="e.g. Software Engineer / Doctor" required>
+                        <input type="text" name="Education" placeholder="Last Degree / Qualification" required>
                     </div>
                     <div class="input-group">
                         <label>Monthly Income</label>
-                        <input type="text" name="Candidate_Monthly_Income" placeholder="e.g. 150k+" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Marital Status</label>
-                        <select name="Candidate_Marital_Status" required>
-                            <option value="Single">Single</option>
-                            <option value="Divorced">Divorced</option>
-                            <option value="Widowed">Widowed</option>
-                            <option value="Khula">Khula</option>
-                        </select>
+                        <input type="text" name="Monthly_Income" placeholder="e.g. 100k+ / Private Job" required>
                     </div>
                     <div class="input-group">
                         <label>Contact Number (Calling)</label>
-                        <input type="tel" name="Candidate_Call_Number" placeholder="Contact number for calling" required>
+                        <input type="tel" name="Contact_Number_Calling" placeholder="Mobile Number" required>
                     </div>
                     <div class="input-group">
                         <label>WhatsApp Number</label>
-                        <input type="tel" name="Candidate_WhatsApp_Number" placeholder="WhatsApp number" required>
-                    </div>
-                </div>
-
-                <!-- Family Details -->
-                <div class="section-title">Family Background</div>
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>Father Status</label>
-                        <select name="Family_Father_Status" required>
-                            <option value="Alive">Alive</option>
-                            <option value="Passed Away">Passed Away</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Mother Status</label>
-                        <select name="Family_Mother_Status" required>
-                            <option value="Alive">Alive</option>
-                            <option value="Passed Away">Passed Away</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Brothers Count</label>
-                        <input type="number" name="Family_Brothers_Count" min="0" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Sisters Count</label>
-                        <input type="number" name="Family_Sisters_Count" min="0" required>
-                    </div>
-                    <div class="input-group full-width">
-                        <label>House Type</label>
-                        <select name="Family_House_Type" required>
-                            <option value="Own (Independent)">Own (Independent)</option>
-                            <option value="Own (Joint)">Own (Joint)</option>
-                            <option value="Rented">Rented</option>
-                            <option value="Government Provided">Government Provided</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- Partner Preferences -->
-                <div class="section-title">Partner Preferences</div>
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>Preferred Age Range</label>
-                        <input type="text" name="Partner_Preferred_Age" placeholder="e.g. 22-26" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Preferred City</label>
-                        <input type="text" name="Partner_Preferred_City" placeholder="e.g. Lahore / Any" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Preferred Caste</label>
-                        <input type="text" name="Partner_Preferred_Caste" placeholder="e.g. Same / Any" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Preferred Education</label>
-                        <input type="text" name="Partner_Preferred_Education" placeholder="e.g. Masters / Graduate" required>
-                    </div>
-                </div>
-
-                <!-- Mandatory Uploads -->
-                <div class="section-title">Documentation</div>
-                <div class="form-grid">
-                    <div class="input-group">
-                        <label>Profile Photo</label>
-                        <div class="file-input-wrapper">
-                            <i class="fas fa-camera"></i>
-                            <p>Select Photo</p>
-                            <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="Profile_Photo" id="profilePhotoInput" accept="image/*" required onchange="updateFileName(this)">
-                        </div>
-                    </div>
-                    <div class="input-group">
-                        <label>Payment Screenshot</label>
-                        <div class="file-input-wrapper">
-                            <i class="fas fa-receipt"></i>
-                            <p>Upload Screenshot</p>
-                            <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="Payment_Screenshot_Receipt" id="receiptInput" accept="image/*" required onchange="updateFileName(this)">
-                        </div>
+                        <input type="tel" name="WhatsApp_Number" placeholder="WhatsApp Number" required>
                     </div>
                 </div>
 
                 <div class="submit-section">
-                    <button type="submit" class="btn-submit" id="submitBtn">
-                        Submit Application <div class="loader" id="loader"></div>
-                    </button>
-                    <p style="margin-top: 25px; color: #777; font-size: 0.85rem;">
-                        <i class="fas fa-lock"></i> All applications are handled with strict 100% confidentiality.
+                    <button type="submit" class="btn-submit" id="submitBtn">Submit Application</button>
+                    <p style="margin-top: 20px; color: #777; font-size: 0.8rem;">
+                        <i class="fas fa-lock"></i> Secured with 256-bit Confidentiality.
                     </p>
                 </div>
             </form>
@@ -518,160 +254,50 @@
         <div class="success-content">
             <i class="fas fa-check-circle"></i>
             <h2>Success!</h2>
-            <p>Assalam-o-Alaikum, Your Application has been Submitted.<br>Our team will verify and contact you soon.</p>
+            <p>Assalam-o-Alaikum, Your Application has been Submitted.<br>Our team will contact you soon.</p>
             <button class="btn-submit" onclick="window.location.href='index.html'" style="background: var(--accent-gold); color: var(--primary-maroon);">Back to Home</button>
         </div>
     </div>
 
-    <footer>
-        <div class="container">
-            <div class="footer-grid">
-                <img src="images/official_logo.png" class="footer-logo-large" alt="Haya Bureau Logo">
-                <ul class="footer-links">
-                    <li><a href="about.html">Privacy</a></li>
-                    <li><a href="about.html">Terms</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="about.html">Our Heritage</a></li>
-                </ul>
-                <div class="footer-socials">
-                    <a href="https://web.facebook.com/profile.php?id=61583555798844" target="_blank"><i class="fab fa-facebook-f"></i></a>
-                    <a href="https://www.instagram.com/hayamarriageebureau?igsh=eXlzOGR5bGh1YTY3" target="_blank"><i class="fab fa-instagram"></i></a>
-                    <a href="https://wa.me/923706462317" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="copyright">&copy; 2026 Haya Marriage Bureau. Zenith of Matrimony.</div>
-                <div class="developer-signature" style="font-size: 12px; color: #D4AF37;">
-                    Developed by: <a href="https://wa.me/923079661669" target="_blank" style="color: #D4AF37; text-decoration: none; font-weight: 700;">Zargham Mustafa</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        function updateFileName(input) {
-            const fileName = input.files[0] ? input.files[0].name : "";
-            input.parentElement.querySelector('.file-name').textContent = fileName;
-        }
-
-        async function compressImage(file, quality = 0.6) {
-            return new Promise((resolve) => {
-                const reader = new FileReader();
-                reader.readAsDataURL(file);
-                reader.onload = (event) => {
-                    const img = new Image();
-                    img.src = event.target.result;
-                    img.onload = () => {
-                        const canvas = document.createElement('canvas');
-                        const ctx = canvas.getContext('2d');
-                        
-                        let width = img.width;
-                        let height = img.height;
-                        const MAX_SIZE = 1200;
-
-                        if (width > height) {
-                            if (width > MAX_SIZE) {
-                                height *= MAX_SIZE / width;
-                                width = MAX_SIZE;
-                            }
-                        } else {
-                            if (height > MAX_SIZE) {
-                                width *= MAX_SIZE / height;
-                                height = MAX_SIZE;
-                            }
-                        }
-
-                        canvas.width = width;
-                        canvas.height = height;
-                        ctx.drawImage(img, 0, 0, width, height);
-                        canvas.toBlob((blob) => {
-                            resolve(new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() }));
-                        }, 'image/jpeg', quality);
-                    };
-                };
-            });
-        }
-
-        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const form = this;
             const btn = document.getElementById('submitBtn');
-            const loader = document.getElementById('loader');
             const overlay = document.getElementById('successOverlay');
-            const candidateName = document.getElementById('candidateNameInput').value;
 
-            // Update Dynamic Subject
-            document.getElementById('formSubject').value = `New Registration: ${candidateName} - Fee Paid`;
-
-            // UI Feedback
             btn.disabled = true;
-            if (loader) loader.style.display = 'inline-block';
-            btn.innerHTML = 'UPLOADING & COMPRESSING... <div class="loader" style="display:inline-block"></div>';
+            btn.innerHTML = 'Submitting...';
 
-            const originalData = new FormData(form);
-            const formData = new FormData();
-            
-            // Access Key Cleanup: Trim and ensure it's the first item
-            const cleanKey = "44866946-a4c3-421f-8980-6060c410317e".trim();
-            formData.append('access_key', cleanKey);
-
-            // Add all other fields
-            for (let [name, value] of originalData.entries()) {
-                if (name !== 'access_key') {
-                    formData.append(name, value);
-                }
-            }
-
-            // Client-side Compression to resolve "Network failure" (Under 500KB)
-            try {
-                const profilePhotoInput = document.getElementById('profilePhotoInput');
-                const receiptInput = document.getElementById('receiptInput');
-
-                if (profilePhotoInput.files[0]) {
-                    const compressedFile = await compressImage(profilePhotoInput.files[0]);
-                    formData.set('Profile_Photo', compressedFile);
-                    console.log('✅ Profile Photo Compressed:', compressedFile.size);
-                }
-                if (receiptInput.files[0]) {
-                    const compressedFile = await compressImage(receiptInput.files[0]);
-                    formData.set('Payment_Screenshot_Receipt', compressedFile);
-                    console.log('✅ Receipt Compressed:', compressedFile.size);
-                }
-            } catch (compressErr) {
-                console.error('Compression failed:', compressErr);
-            }
+            const formData = new FormData(form);
+            const data = {};
+            formData.forEach((value, key) => data[key] = value);
 
             fetch(form.action, {
                 method: 'POST',
-                body: formData,
+                body: JSON.stringify(data),
                 headers: {
+                    'Content-Type': 'application/json',
                     'Accept': 'application/json'
                 }
             })
-            .then(async (response) => {
-                const result = await response.json();
+            .then(response => {
                 if (response.status === 200) {
                     form.reset();
-                    document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
                     overlay.style.display = 'flex';
                 } else {
-                    alert("Submission failed: " + (result.message || "Invalid Access Key."));
-                    resetSubmitButton();
+                    alert("Submission error. Please ensure your internet is connected or try again.");
+                    btn.disabled = false;
+                    btn.innerHTML = 'Submit Application';
                 }
             })
             .catch(error => {
-                console.log('Network Error:', error);
-                alert("Network failure. Files might be too large or connection is unstable. Please try again.");
-                resetSubmitButton();
-            });
-
-            function resetSubmitButton() {
+                console.error('Error:', error);
+                alert("Network error. Please try again.");
                 btn.disabled = false;
                 btn.innerHTML = 'Submit Application';
-                if (loader) loader.style.display = 'none';
-            }
+            });
         });
     </script>
-    <script type="module" src="js/ui.js"></script>
 </body>
 </html>
