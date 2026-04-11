@@ -325,7 +325,7 @@
         <div class="mobile-nav-links">
             <a href="index.html">Home</a>
             <a href="profiles.html">Profiles</a>
-            <a href="register.html" class="active">Register</a>
+            <a href="register.html" class="active">Register Now</a>
             <a href="about.html">Our Story</a>
             <a href="packages.html">Membership</a>
             <a href="contact.html">Contact</a>
@@ -350,7 +350,7 @@
             </div>
 
             <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
-                <!-- Critical: Using EXACT Access Key provided with NO spaces -->
+                <!-- Web3Forms Access Key: 44866946-a4c3-421f-8980-6060c410317e -->
                 <input type="hidden" name="access_key" value="44866946-a4c3-421f-8980-6060c410317e">
                 <input type="hidden" name="subject" id="formSubject" value="New Highly Confidential Registration - Haya Bureau">
                 <input type="hidden" name="from_name" value="Haya Marriage Bureau Application">
@@ -412,7 +412,6 @@
                             <option value="Khula">Khula</option>
                         </select>
                     </div>
-                    <!-- Required Telephone Fields -->
                     <div class="input-group">
                         <label>Call Number</label>
                         <input type="tel" name="Candidate_Call_Number" placeholder="Contact number for calling" required>
@@ -489,7 +488,7 @@
                             <i class="fas fa-camera"></i>
                             <p>Select Photo</p>
                             <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="Profile_Photo" accept="image/*" required onchange="updateFileName(this)">
+                            <input type="file" name="Profile_Photo" id="profilePhotoInput" accept="image/*" required onchange="updateFileName(this)">
                         </div>
                     </div>
                     <div class="input-group">
@@ -498,7 +497,7 @@
                             <i class="fas fa-receipt"></i>
                             <p>Upload Screenshot</p>
                             <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="Payment_Screenshot_Receipt" accept="image/*" required onchange="updateFileName(this)">
+                            <input type="file" name="Payment_Screenshot_Receipt" id="receiptInput" accept="image/*" required onchange="updateFileName(this)">
                         </div>
                     </div>
                 </div>
@@ -552,20 +551,48 @@
     <script>
         function updateFileName(input) {
             const fileName = input.files[0] ? input.files[0].name : "";
-            const sizeInMB = input.files[0] ? input.files[0].size / (1024 * 1024) : 0;
-            
-            // Web3Forms limit safety check
-            if (sizeInMB > 4) {
-                alert("File is too large! Please upload a file smaller than 4MB.");
-                input.value = "";
-                input.parentElement.querySelector('.file-name').textContent = "";
-                return;
-            }
-            
             input.parentElement.querySelector('.file-name').textContent = fileName;
         }
 
-        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+        async function compressImage(file, quality = 0.6) {
+            return new Promise((resolve) => {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = (event) => {
+                    const img = new Image();
+                    img.src = event.target.result;
+                    img.onload = () => {
+                        const canvas = document.createElement('canvas');
+                        const ctx = canvas.getContext('2d');
+                        
+                        let width = img.width;
+                        let height = img.height;
+                        const MAX_SIZE = 1200;
+
+                        if (width > height) {
+                            if (width > MAX_SIZE) {
+                                height *= MAX_SIZE / width;
+                                width = MAX_SIZE;
+                            }
+                        } else {
+                            if (height > MAX_SIZE) {
+                                width *= MAX_SIZE / height;
+                                height = MAX_SIZE;
+                            }
+                        }
+
+                        canvas.width = width;
+                        canvas.height = height;
+                        ctx.drawImage(img, 0, 0, width, height);
+                        canvas.toBlob((blob) => {
+                            resolve(new File([blob], file.name, { type: 'image/jpeg', lastModified: Date.now() }));
+                        }, 'image/jpeg', quality);
+                    };
+                };
+            });
+        }
+
+        document.getElementById('applicationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = this;
             const btn = document.getElementById('submitBtn');
@@ -579,9 +606,28 @@
             // UI Feedback
             btn.disabled = true;
             if (loader) loader.style.display = 'inline-block';
-            btn.innerHTML = 'VERIFYING... <div class="loader" style="display:inline-block"></div>';
+            btn.innerHTML = 'UPLOADING & COMPRESSING... <div class="loader" style="display:inline-block"></div>';
 
             const formData = new FormData(form);
+
+            // Client-side Compression to resolve "Network failure" (Under 500KB)
+            try {
+                const profilePhotoInput = document.getElementById('profilePhotoInput');
+                const receiptInput = document.getElementById('receiptInput');
+
+                if (profilePhotoInput.files[0]) {
+                    const compressedFile = await compressImage(profilePhotoInput.files[0]);
+                    formData.set('Profile_Photo', compressedFile);
+                    console.log('✅ Profile Photo Compressed:', compressedFile.size);
+                }
+                if (receiptInput.files[0]) {
+                    const compressedFile = await compressImage(receiptInput.files[0]);
+                    formData.set('Payment_Screenshot_Receipt', compressedFile);
+                    console.log('✅ Receipt Compressed:', compressedFile.size);
+                }
+            } catch (compressErr) {
+                console.error('Compression failed:', compressErr);
+            }
 
             fetch(form.action, {
                 method: 'POST',
@@ -592,21 +638,18 @@
             })
             .then(async (response) => {
                 const result = await response.json();
-                console.log('API Response:', response.status, result);
-                
                 if (response.status === 200 && result.success) {
                     form.reset();
                     document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
                     overlay.style.display = 'flex';
                 } else {
-                    console.error('API Error:', result);
-                    alert("Submission failed: " + (result.message || "Invalid Access Key or Server Error."));
+                    alert("Submission failed: " + (result.message || "Invalid Access Key."));
                     resetSubmitButton();
                 }
             })
             .catch(error => {
                 console.log('Network Error:', error);
-                alert("Network failure. Please check your connection and ensure files are small (max 4MB).");
+                alert("Network failure. Files might be too large or connection is unstable. Please try again.");
                 resetSubmitButton();
             });
 
