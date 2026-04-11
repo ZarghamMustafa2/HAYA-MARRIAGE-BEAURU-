@@ -349,7 +349,7 @@
                 <p style="font-size: 0.85rem; margin-top: 10px;">Please upload the payment screenshot below to process your application.</p>
             </div>
 
-            <form id="applicationForm" action="https://formspree.io/f/hayamarriageebureau@gmail.com" method="POST" enctype="multipart/form-data">
+            <form id="applicationForm" action="https://formspree.io/f/mqakpogw" method="POST" enctype="multipart/form-data">
                 
                 <!-- Personal Details -->
                 <div class="section-title">Personal Details</div>
@@ -505,8 +505,8 @@
     <div class="success-overlay" id="successOverlay">
         <div class="success-content">
             <i class="fas fa-check-circle"></i>
-            <h2>Assalam-o-Alaikum</h2>
-            <p>Your Application has been Submitted.<br>Our team will verify and contact you soon.</p>
+            <h2>Success!</h2>
+            <p>Your application has been received.<br>Assalam-o-Alaikum, Our team will verify and contact you soon.</p>
             <button class="btn-submit" onclick="window.location.href='index.html'" style="background: var(--accent-gold); color: var(--primary-maroon);">Back to Home</button>
         </div>
     </div>
@@ -544,17 +544,19 @@
 
         document.getElementById('applicationForm').addEventListener('submit', function(e) {
             e.preventDefault();
+            const form = this;
             const btn = document.getElementById('submitBtn');
             const loader = document.getElementById('loader');
             const overlay = document.getElementById('successOverlay');
 
             btn.disabled = true;
-            loader.style.display = 'inline-block';
+            if (loader) loader.style.display = 'inline-block';
             btn.innerHTML = 'Processing... <div class="loader" style="display:inline-block"></div>';
 
-            const formData = new FormData(this);
+            // Correctly capture all form data including files
+            const formData = new FormData(form);
 
-            fetch(this.action, {
+            fetch(form.action, {
                 method: 'POST',
                 body: formData,
                 headers: {
@@ -562,14 +564,19 @@
                 }
             }).then(response => {
                 if (response.ok) {
+                    form.reset();
+                    // Clear file names in UI
+                    document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
                     overlay.style.display = 'flex';
                 } else {
-                    alert('There was an error submitting your application. Please try again.');
-                    btn.disabled = false;
-                    btn.innerHTML = 'Submit Application <div class="loader" id="loader"></div>';
+                    return response.json().then(data => {
+                        console.error('Submission Error Data:', data);
+                        throw new Error(data.error || 'Server error');
+                    });
                 }
             }).catch(error => {
-                alert('Network error. Please check your connection.');
+                console.log('Submission Catch Error:', error);
+                alert('Error submitting application. ' + error.message + '. Please try again.');
                 btn.disabled = false;
                 btn.innerHTML = 'Submit Application <div class="loader" id="loader"></div>';
             });
