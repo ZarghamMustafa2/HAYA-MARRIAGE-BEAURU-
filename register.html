@@ -115,7 +115,7 @@
             padding-left: 5px;
         }
 
-        .input-group input, .input-group select, .input-group textarea {
+        .input-group input, .input-group select {
             padding: 16px 20px;
             border-radius: 12px;
             border: 1.5px solid rgba(77, 0, 0, 0.1);
@@ -134,9 +134,7 @@
             transform: translateY(-2px);
         }
 
-        .full-width {
-            grid-column: 1 / -1;
-        }
+        .full-width { grid-column: 1 / -1; }
 
         .submit-section {
             margin-top: 80px;
@@ -189,16 +187,14 @@
             vertical-align: middle;
         }
 
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
         /* Success Message Overlay */
         .success-overlay {
             display: none;
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 77, 38, 0.98); /* Premium Emerald Green */
+            background: rgba(0, 77, 38, 0.98);
             z-index: 10000;
             justify-content: center;
             align-items: center;
@@ -207,31 +203,14 @@
             padding: 20px;
         }
 
-        .success-content {
-            max-width: 600px;
-            animation: slideInUp 0.6s ease;
-        }
+        .success-content { max-width: 600px; animation: slideInUp 0.6s ease; }
+        .success-content i { font-size: 5rem; margin-bottom: 30px; }
+        .success-content h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; }
+        .success-content p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 40px; }
 
         @keyframes slideInUp {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
-        }
-
-        .success-content i {
-            font-size: 5rem;
-            margin-bottom: 30px;
-        }
-
-        .success-content h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .success-content p {
-            font-size: 1.2rem;
-            line-height: 1.6;
-            margin-bottom: 40px;
         }
 
         @media (max-width: 768px) {
@@ -264,7 +243,7 @@
             </div>
 
             <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST">
-                <!-- Web3Forms Config -->
+                <!-- FOOLPROOF ACCESS KEY AT THE VERY TOP -->
                 <input type="hidden" name="access_key" value="44866946-a4c3-421f-8980-6060c410317e">
                 <input type="hidden" name="subject" value="New Registration from Haya Marriage Bureau">
                 <input type="hidden" name="from_name" value="Haya Marriage Bureau Application">
@@ -311,11 +290,11 @@
                     </div>
                     <div class="input-group">
                         <label>Profession</label>
-                        <input type="text" name="Candidate_Profession" placeholder="e.g. Software Engineer / Doctor" required>
+                        <input type="text" name="Candidate_Profession" required>
                     </div>
                     <div class="input-group">
                         <label>Monthly Income</label>
-                        <input type="text" name="Candidate_Monthly_Income" placeholder="e.g. 150k+" required>
+                        <input type="text" name="Candidate_Monthly_Income" required>
                     </div>
                     <div class="input-group">
                         <label>Marital Status</label>
@@ -328,7 +307,7 @@
                     </div>
                     <div class="input-group">
                         <label>Contact Number (Calling)</label>
-                        <input type="tel" name="Candidate_Call_Number" placeholder="Contact number for calling" required>
+                        <input type="tel" name="Candidate_Call_Number" placeholder="Contact number" required>
                     </div>
                     <div class="input-group">
                         <label>WhatsApp Number</label>
@@ -398,7 +377,7 @@
                         Submit Application <div class="loader" id="loader"></div>
                     </button>
                     <p style="margin-top: 25px; color: #777; font-size: 0.85rem;">
-                        <i class="fas fa-lock"></i> All applications are handled with strict 100% confidentiality.
+                        <i class="fas fa-lock"></i> Secured 100% Personal Confidentiality.
                     </p>
                 </div>
             </form>
@@ -427,14 +406,14 @@
             if (loader) loader.style.display = 'inline-block';
             btn.innerHTML = 'Submitting... <div class="loader" style="display:inline-block"></div>';
 
-            // Manual FormData construction to ensure access_key is first
+            // FOOLPROOF DATA CONSTRUCTION: access_key MUST be first!
             const originalData = new FormData(form);
             const formData = new FormData();
             
-            // 1. Force the key first
+            // 1. Explicitly prepend the access_key
             formData.append('access_key', '44866946-a4c3-421f-8980-6060c410317e');
 
-            // 2. Append all other fields
+            // 2. Add all other fields except existing access_key to avoid duplication
             for (let [name, value] of originalData.entries()) {
                 if (name !== 'access_key') {
                     formData.append(name, value);
@@ -454,13 +433,13 @@
                     form.reset();
                     overlay.style.display = 'flex';
                 } else {
-                    alert("Submission failed: " + (result.message || "Please check your information and try again."));
+                    alert("Submission error: " + (result.message || "Invalid response from server. Please try again."));
                     resetSubmitButton();
                 }
             })
             .catch(error => {
                 console.error('Network Error:', error);
-                alert("Network failure. Please ensure you are connected to the internet and try again.");
+                alert("Network failure. Please ensure your internet is connected or try again.");
                 resetSubmitButton();
             });
 
