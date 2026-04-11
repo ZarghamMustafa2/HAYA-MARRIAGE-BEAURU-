@@ -349,7 +349,6 @@
                 <p style="font-size: 0.85rem; margin-top: 10px;">Please upload the payment screenshot below to process your application.</p>
             </div>
 
-            <!-- Backend Switched to Web3Forms for higher reliability -->
             <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
                 <!-- Web3Forms Specific Fields -->
                 <input type="hidden" name="access_key" value="44866946-a4c3-421f-8980-6060c410317e">
@@ -413,6 +412,15 @@
                             <option value="Widowed">Widowed</option>
                             <option value="Khula">Khula</option>
                         </select>
+                    </div>
+                    <!-- New Contact Fields -->
+                    <div class="input-group">
+                        <label>Contact Number for Calling</label>
+                        <input type="tel" name="Candidate_Call_Number" placeholder="e.g. 03201234567" required>
+                    </div>
+                    <div class="input-group">
+                        <label>WhatsApp Number</label>
+                        <input type="tel" name="Candidate_WhatsApp_Number" placeholder="e.g. 03201234567" required>
                     </div>
                 </div>
 
@@ -547,8 +555,9 @@
             const fileName = input.files[0] ? input.files[0].name : "";
             const sizeInMB = input.files[0] ? input.files[0].size / (1024 * 1024) : 0;
             
-            if (sizeInMB > 5) { // Web3Forms usually allows up to 5-10MB but staying safe
-                alert("File is too large! Please upload a file smaller than 5MB.");
+            // Limit to 4MB per file to stay within Web3Forms total limits and avoid network failures
+            if (sizeInMB > 4) {
+                alert("File is too large! Please upload a file smaller than 4MB. Large files cause network failures.");
                 input.value = "";
                 input.parentElement.querySelector('.file-name').textContent = "";
                 return;
@@ -586,8 +595,6 @@
             }
 
             // 3. Main Submission via Web3Forms API
-            console.log('DEBUG: Submitting to Web3Forms with Key:', formData.get('access_key'));
-            
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -597,23 +604,23 @@
             })
             .then(async (response) => {
                 const result = await response.json();
-                console.log('📦 Web3Forms API Response Status:', response.status, result);
+                console.log('📦 Web3Forms API Response:', response.status, result);
                 
                 if (response.status === 200 && result.success) {
-                    // SUCCESS: Only show message AFTER API success as requested
+                    // SUCCESS
                     form.reset();
                     document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
                     overlay.style.display = 'flex';
                 } else {
-                    // ERROR Response
-                    console.error('⚠️ API Logic Failure:', result);
+                    // API ERROR
+                    console.error('⚠️ API Failure:', result);
                     alert("Submission failed: " + (result.message || "Unknown error occurred."));
                     resetSubmitButton();
                 }
             })
             .catch(error => {
                 console.log('❌ Network Catch Error:', error);
-                alert("Network failure. Please check your internet and try again.");
+                alert("Network failure. Files might be too large. Please try with smaller images (max 4MB each) or check your connection.");
                 resetSubmitButton();
             });
 
