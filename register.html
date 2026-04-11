@@ -6,7 +6,7 @@
     <title>Application Form | Haya Marriage Bureau</title>
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-maroon: #4d0000;
@@ -14,7 +14,6 @@
             --cream-bg: #FFFDF5;
             --white: #ffffff;
             --text-dark: #1a0000;
-            --gold-light: #f2d480;
         }
 
         body {
@@ -166,15 +165,6 @@
             color: #fff;
         }
 
-        .btn-submit:disabled {
-            background: #ccc;
-            border-color: #999;
-            color: #666;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
-
         .loader {
             display: none;
             width: 20px;
@@ -188,30 +178,6 @@
         }
 
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        /* Success Message Overlay */
-        .success-overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 77, 38, 0.98);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--accent-gold);
-            padding: 20px;
-        }
-
-        .success-content { max-width: 600px; animation: slideInUp 0.6s ease; }
-        .success-content i { font-size: 5rem; margin-bottom: 30px; }
-        .success-content h2 { font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 20px; }
-        .success-content p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 40px; }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
 
         @media (max-width: 768px) {
             .register-card { padding: 40px 20px; }
@@ -237,43 +203,38 @@
     <main class="auth-container">
         <div class="register-card">
             <div class="form-header">
-                <p>Private & Confidential</p>
+                <p>Digital Submission</p>
                 <h1>Registration Form</h1>
                 <div style="width: 100px; height: 3px; background: var(--accent-gold); margin: 0 auto;"></div>
             </div>
 
-            <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST">
-                <!-- FOOLPROOF ACCESS KEY AT THE VERY TOP -->
-                <input type="hidden" name="access_key" value="44866946-a4c3-421f-8980-6060c410317e">
-                <input type="hidden" name="subject" value="New Registration from Haya Marriage Bureau">
-                <input type="hidden" name="from_name" value="Haya Marriage Bureau Application">
-                
+            <form id="applicationForm">
                 <!-- Personal Details -->
                 <div class="section-title">Personal Details</div>
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Candidate Full Name</label>
-                        <input type="text" name="Candidate_Name" placeholder="As per CNIC" required>
+                        <input type="text" id="candidate_name" placeholder="As per CNIC" required>
                     </div>
                     <div class="input-group">
                         <label>Father's Name</label>
-                        <input type="text" name="Candidate_Father_Name" required>
+                        <input type="text" id="father_name" required>
                     </div>
                     <div class="input-group">
                         <label>Age</label>
-                        <input type="number" name="Candidate_Age" min="18" max="75" required>
+                        <input type="number" id="age" min="18" max="75" required>
                     </div>
                     <div class="input-group">
                         <label>Height</label>
-                        <input type="text" name="Candidate_Height" placeholder="e.g. 5' 6\" required>
+                        <input type="text" id="height" placeholder="e.g. 5' 6\" required>
                     </div>
                     <div class="input-group">
                         <label>Caste</label>
-                        <input type="text" name="Candidate_Caste" required>
+                        <input type="text" id="caste" required>
                     </div>
                     <div class="input-group">
                         <label>Sect</label>
-                        <select name="Candidate_Sect" required>
+                        <select id="sect" required>
                             <option value="" disabled selected>Select Sect</option>
                             <option value="Sunni">Sunni</option>
                             <option value="Shia">Shia</option>
@@ -286,19 +247,19 @@
                     </div>
                     <div class="input-group">
                         <label>Education</label>
-                        <input type="text" name="Candidate_Education" placeholder="Last Degree / Qualification" required>
+                        <input type="text" id="education" placeholder="Last Degree / Qualification" required>
                     </div>
                     <div class="input-group">
                         <label>Profession</label>
-                        <input type="text" name="Candidate_Profession" required>
+                        <input type="text" id="profession" required>
                     </div>
                     <div class="input-group">
                         <label>Monthly Income</label>
-                        <input type="text" name="Candidate_Monthly_Income" required>
+                        <input type="text" id="income" required>
                     </div>
                     <div class="input-group">
                         <label>Marital Status</label>
-                        <select name="Candidate_Marital_Status" required>
+                        <select id="marital_status" required>
                             <option value="Single">Single</option>
                             <option value="Divorced">Divorced</option>
                             <option value="Widowed">Widowed</option>
@@ -307,11 +268,11 @@
                     </div>
                     <div class="input-group">
                         <label>Contact Number (Calling)</label>
-                        <input type="tel" name="Candidate_Call_Number" placeholder="Contact number" required>
+                        <input type="tel" id="call_number" placeholder="Contact number" required>
                     </div>
                     <div class="input-group">
                         <label>WhatsApp Number</label>
-                        <input type="tel" name="Candidate_WhatsApp_Number" placeholder="WhatsApp number" required>
+                        <input type="tel" id="whatsapp_number" placeholder="WhatsApp number" required>
                     </div>
                 </div>
 
@@ -320,29 +281,29 @@
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Father Status</label>
-                        <select name="Family_Father_Status" required>
+                        <select id="family_father" required>
                             <option value="Alive">Alive</option>
                             <option value="Passed Away">Passed Away</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label>Mother Status</label>
-                        <select name="Family_Mother_Status" required>
+                        <select id="family_mother" required>
                             <option value="Alive">Alive</option>
                             <option value="Passed Away">Passed Away</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label>Brothers Count</label>
-                        <input type="number" name="Family_Brothers_Count" min="0" required>
+                        <input type="number" id="brothers" min="0" required>
                     </div>
                     <div class="input-group">
                         <label>Sisters Count</label>
-                        <input type="number" name="Family_Sisters_Count" min="0" required>
+                        <input type="number" id="sisters" min="0" required>
                     </div>
                     <div class="input-group full-width">
                         <label>House Type</label>
-                        <select name="Family_House_Type" required>
+                        <select id="house_type" required>
                             <option value="Own (Independent)">Own (Independent)</option>
                             <option value="Own (Joint)">Own (Joint)</option>
                             <option value="Rented">Rented</option>
@@ -356,98 +317,95 @@
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Preferred Age Range</label>
-                        <input type="text" name="Partner_Preferred_Age" placeholder="e.g. 22-26" required>
+                        <input type="text" id="partner_age" placeholder="e.g. 22-26" required>
                     </div>
                     <div class="input-group">
                         <label>Preferred City</label>
-                        <input type="text" name="Partner_Preferred_City" placeholder="e.g. Lahore / Any" required>
+                        <input type="text" id="partner_city" placeholder="e.g. Lahore / Any" required>
                     </div>
                     <div class="input-group">
                         <label>Preferred Caste</label>
-                        <input type="text" name="Partner_Preferred_Caste" placeholder="e.g. Same / Any" required>
+                        <input type="text" id="partner_caste" placeholder="e.g. Same / Any" required>
                     </div>
                     <div class="input-group">
                         <label>Preferred Education</label>
-                        <input type="text" name="Partner_Preferred_Education" placeholder="e.g. Masters / Graduate" required>
+                        <input type="text" id="partner_education" placeholder="e.g. Masters / Graduate" required>
                     </div>
                 </div>
 
                 <div class="submit-section">
                     <button type="submit" class="btn-submit" id="submitBtn">
-                        Submit Application <div class="loader" id="loader"></div>
+                        Submit via WhatsApp
                     </button>
                     <p style="margin-top: 25px; color: #777; font-size: 0.85rem;">
-                        <i class="fas fa-lock"></i> Secured 100% Personal Confidentiality.
+                        <i class="fab fa-whatsapp"></i> Instant submission to our consultant.
                     </p>
                 </div>
             </form>
         </div>
     </main>
 
-    <div class="success-overlay" id="successOverlay">
-        <div class="success-content">
-            <i class="fas fa-check-circle"></i>
-            <h2>Success!</h2>
-            <p>Assalam-o-Alaikum, Your Application has been Submitted.<br>Our team will verify and contact you soon.</p>
-            <button class="btn-submit" onclick="window.location.href='index.html'" style="background: var(--accent-gold); color: var(--primary-maroon);">Back to Home</button>
-        </div>
-    </div>
-
     <script>
         document.getElementById('applicationForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const form = this;
-            const btn = document.getElementById('submitBtn');
-            const loader = document.getElementById('loader');
-            const overlay = document.getElementById('successOverlay');
-
-            // UI Feedback
-            btn.disabled = true;
-            if (loader) loader.style.display = 'inline-block';
-            btn.innerHTML = 'Submitting... <div class="loader" style="display:inline-block"></div>';
-
-            // FOOLPROOF DATA CONSTRUCTION: access_key MUST be first!
-            const originalData = new FormData(form);
-            const formData = new FormData();
             
-            // 1. Explicitly prepend the access_key
-            formData.append('access_key', '44866946-a4c3-421f-8980-6060c410317e');
+            // Collect Form Data
+            const data = {
+                candidate_name: document.getElementById('candidate_name').value,
+                father_name: document.getElementById('father_name').value,
+                age: document.getElementById('age').value,
+                height: document.getElementById('height').value,
+                caste: document.getElementById('caste').value,
+                sect: document.getElementById('sect').value,
+                education: document.getElementById('education').value,
+                profession: document.getElementById('profession').value,
+                income: document.getElementById('income').value,
+                marital_status: document.getElementById('marital_status').value,
+                call_number: document.getElementById('call_number').value,
+                whatsapp_number: document.getElementById('whatsapp_number').value,
+                family_father: document.getElementById('family_father').value,
+                family_mother: document.getElementById('family_mother').value,
+                brothers: document.getElementById('brothers').value,
+                sisters: document.getElementById('sisters').value,
+                house_type: document.getElementById('house_type').value,
+                partner_age: document.getElementById('partner_age').value,
+                partner_city: document.getElementById('partner_city').value,
+                partner_caste: document.getElementById('partner_caste').value,
+                partner_education: document.getElementById('partner_education').value
+            };
 
-            // 2. Add all other fields except existing access_key to avoid duplication
-            for (let [name, value] of originalData.entries()) {
-                if (name !== 'access_key') {
-                    formData.append(name, value);
-                }
-            }
+            // Format WhatsApp Message
+            const message = `*NEW REGISTRATION from HAYA BUREAU*%0A%0A` +
+                `*--- PERSONAL DETAILS ---*%0A` +
+                `*Name:* ${data.candidate_name}%0A` +
+                `*Father Name:* ${data.father_name}%0A` +
+                `*Age:* ${data.age}%0A` +
+                `*Height:* ${data.height}%0A` +
+                `*Caste:* ${data.caste}%0A` +
+                `*Sect:* ${data.sect}%0A` +
+                `*Education:* ${data.education}%0A` +
+                `*Profession:* ${data.profession}%0A` +
+                `*Income:* ${data.income}%0A` +
+                `*Marital Status:* ${data.marital_status}%0A` +
+                `*Call:* ${data.call_number}%0A` +
+                `*WA:* ${data.whatsapp_number}%0A%0A` +
+                `*--- FAMILY BACKGROUND ---*%0A` +
+                `*Father Status:* ${data.family_father}%0A` +
+                `*Mother Status:* ${data.family_mother}%0A` +
+                `*Brothers:* ${data.brothers}%0A` +
+                `*Sisters:* ${data.sisters}%0A` +
+                `*House:* ${data.house_type}%0A%0A` +
+                `*--- PARTNER PREFERENCES ---*%0A` +
+                `*Pref. Age:* ${data.partner_age}%0A` +
+                `*Pref. City:* ${data.partner_city}%0A` +
+                `*Pref. Caste:* ${data.partner_caste}%0A` +
+                `*Pref. Education:* ${data.partner_education}`;
 
-            fetch(form.action, {
-                method: 'POST',
-                body: formData,
-                headers: {
-                    'Accept': 'application/json'
-                }
-            })
-            .then(async (response) => {
-                const result = await response.json();
-                if (response.status === 200) {
-                    form.reset();
-                    overlay.style.display = 'flex';
-                } else {
-                    alert("Submission error: " + (result.message || "Invalid response from server. Please try again."));
-                    resetSubmitButton();
-                }
-            })
-            .catch(error => {
-                console.error('Network Error:', error);
-                alert("Network failure. Please ensure your internet is connected or try again.");
-                resetSubmitButton();
-            });
-
-            function resetSubmitButton() {
-                btn.disabled = false;
-                btn.innerHTML = 'Submit Application';
-                if (loader) loader.style.display = 'none';
-            }
+            // WhatsApp Desktop/Web URL
+            const whatsappUrl = `https://wa.me/923706462317?text=${message}`;
+            
+            // Redirect
+            window.open(whatsappUrl, '_blank');
         });
     </script>
 </body>
