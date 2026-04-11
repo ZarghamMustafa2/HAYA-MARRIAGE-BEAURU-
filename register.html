@@ -349,17 +349,20 @@
                 <p style="font-size: 0.85rem; margin-top: 10px;">Please upload the payment screenshot below to process your application.</p>
             </div>
 
-            <form id="applicationForm" action="https://formspree.io/hayamarriageebureau@gmail.com" method="POST" enctype="multipart/form-data">
-                <!-- Formspree Helpers -->
-                <input type="hidden" name="_subject" value="New Exclusive Registration - Haya Bureau">
-                <input type="hidden" name="_template" value="table">
+            <!-- Backend Switched to Web3Forms for higher reliability -->
+            <form id="applicationForm" action="https://api.web3forms.com/submit" method="POST" enctype="multipart/form-data">
+                <!-- Web3Forms Specific Fields -->
+                <input type="hidden" name="access_key" value="44866946-a4c3-421f-8980-6060c410317e">
+                <input type="hidden" name="apikey" value="44866946-a4c3-421f-8980-6060c410317e">
+                <input type="hidden" name="subject" id="formSubject" value="New Highly Confidential Registration - Haya Bureau">
+                <input type="hidden" name="from_name" value="Haya Marriage Bureau Application">
                 
                 <!-- Personal Details -->
                 <div class="section-title">Personal Details</div>
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Candidate Full Name</label>
-                        <input type="text" name="Candidate_Full_Name" placeholder="As per CNIC" required>
+                        <input type="text" name="Candidate_Name" id="candidateNameInput" placeholder="As per CNIC" required>
                     </div>
                     <div class="input-group">
                         <label>Father's Name</label>
@@ -479,7 +482,7 @@
                             <i class="fas fa-camera"></i>
                             <p>Select Photo</p>
                             <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="Profile_Photo_Upload" accept="image/*" required onchange="updateFileName(this)">
+                            <input type="file" name="Profile_Photo" accept="image/*" required onchange="updateFileName(this)">
                         </div>
                     </div>
                     <div class="input-group">
@@ -488,7 +491,7 @@
                             <i class="fas fa-receipt"></i>
                             <p>Upload Screenshot</p>
                             <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="Payment_Screenshot_Upload" accept="image/*" required onchange="updateFileName(this)">
+                            <input type="file" name="Payment_Screenshot_Receipt" accept="image/*" required onchange="updateFileName(this)">
                         </div>
                     </div>
                 </div>
@@ -498,7 +501,7 @@
                         Submit Application <div class="loader" id="loader"></div>
                     </button>
                     <p style="margin-top: 25px; color: #777; font-size: 0.85rem;">
-                        <i class="fas fa-lock"></i> Your data is secured with end-to-end encryption.
+                        <i class="fas fa-lock"></i> All applications are handled with strict 100% confidentiality.
                     </p>
                 </div>
             </form>
@@ -507,9 +510,9 @@
 
     <div class="success-overlay" id="successOverlay">
         <div class="success-content">
-            <i class="fas fa-paper-plane"></i>
-            <h2>Verification Email Sent!</h2>
-            <p>Please check <strong>hayamarriageebureau@gmail.com</strong> and click 'Confirm' to activate your form.<br>Assalam-o-Alaikum, Our team will verify and contact you soon.</p>
+            <i class="fas fa-check-circle"></i>
+            <h2>Application Received!</h2>
+            <p>Assalam-o-Alaikum, Your Registration has been successfully submitted via Web3Forms Secure Delivery.<br>Our team will verify the payment and profile details and contact you soon.</p>
             <button class="btn-submit" onclick="window.location.href='index.html'" style="background: var(--accent-gold); color: var(--primary-maroon);">Back to Home</button>
         </div>
     </div>
@@ -544,8 +547,8 @@
             const fileName = input.files[0] ? input.files[0].name : "";
             const sizeInMB = input.files[0] ? input.files[0].size / (1024 * 1024) : 0;
             
-            if (sizeInMB > 2) {
-                alert("File is too large! Please upload a file smaller than 2MB.");
+            if (sizeInMB > 5) { // Web3Forms usually allows up to 5-10MB but staying safe
+                alert("File is too large! Please upload a file smaller than 5MB.");
                 input.value = "";
                 input.parentElement.querySelector('.file-name').textContent = "";
                 return;
@@ -560,28 +563,31 @@
             const btn = document.getElementById('submitBtn');
             const loader = document.getElementById('loader');
             const overlay = document.getElementById('successOverlay');
+            const candidateName = document.getElementById('candidateNameInput').value;
+
+            // Update Dynamic Subject
+            document.getElementById('formSubject').value = `New Registration: ${candidateName} - Fee Paid`;
 
             // 1. UI Feedback: Start Processing
             btn.disabled = true;
             if (loader) loader.style.display = 'inline-block';
-            btn.innerHTML = 'PROCESSING... <div class="loader" style="display:inline-block"></div>';
+            btn.innerHTML = 'VERIFYING... <div class="loader" style="display:inline-block"></div>';
 
             const formData = new FormData(form);
             const dataObj = Object.fromEntries(formData.entries());
 
             // 2. Backup Logic: Save to LocalStorage immediately
-            const backupId = 'backup_' + Date.now();
             try {
                 const existingBackups = JSON.parse(localStorage.getItem('haya_form_backups') || '[]');
-                existingBackups.push({ id: backupId, timestamp: new Date().toISOString(), data: dataObj });
+                existingBackups.push({ timestamp: new Date().toISOString(), data: dataObj, provider: 'web3forms' });
                 localStorage.setItem('haya_form_backups', JSON.stringify(existingBackups));
-                console.log('✅ Local backup saved:', backupId);
             } catch (err) {
-                console.error('❌ Local storage backup failed:', err);
+                console.error('Local backup failed:', err);
             }
 
-            // 3. Main Submission via Fetch
-            console.log('DEBUG: Form is posting to exactly:', form.action);
+            // 3. Main Submission via Web3Forms API
+            console.log('DEBUG: Submitting to Web3Forms with Key:', formData.get('access_key'));
+            
             fetch(form.action, {
                 method: 'POST',
                 body: formData,
@@ -589,28 +595,32 @@
                     'Accept': 'application/json'
                 }
             })
-            .then(response => {
-                console.log('🚀 Submission response received. Status:', response.status);
-                return response.json().then(data => {
-                    console.log('📦 Formspree Response Data:', data);
-                    finalizeSuccess();
-                }).catch(err => {
-                    console.log('⚠️ Response is not JSON, but status is:', response.status);
-                    finalizeSuccess();
-                });
+            .then(async (response) => {
+                const result = await response.json();
+                console.log('📦 Web3Forms API Response Status:', response.status, result);
+                
+                if (response.status === 200 && result.success) {
+                    // SUCCESS: Only show message AFTER API success as requested
+                    form.reset();
+                    document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
+                    overlay.style.display = 'flex';
+                } else {
+                    // ERROR Response
+                    console.error('⚠️ API Logic Failure:', result);
+                    alert("Submission failed: " + (result.message || "Unknown error occurred."));
+                    resetSubmitButton();
+                }
             })
             .catch(error => {
                 console.log('❌ Network Catch Error:', error);
-                finalizeSuccess();
+                alert("Network failure. Please check your internet and try again.");
+                resetSubmitButton();
             });
 
-            function finalizeSuccess() {
-                form.reset();
-                document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
-                overlay.style.display = 'flex';
-                // Reset button just in case
+            function resetSubmitButton() {
                 btn.disabled = false;
-                btn.innerHTML = 'SUBMIT APPLICATION';
+                btn.innerHTML = 'Submit Application';
+                if (loader) loader.style.display = 'none';
             }
         });
     </script>
