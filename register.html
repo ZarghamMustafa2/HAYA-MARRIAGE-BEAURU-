@@ -80,6 +80,33 @@
             font-size: 0.9rem;
         }
 
+        .fee-banner {
+            background: var(--primary-maroon);
+            color: var(--white);
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 50px;
+            border: 2px solid var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(77, 0, 0, 0.2);
+        }
+
+        .fee-banner h2 {
+            margin: 0;
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: var(--accent-gold);
+            font-weight: 700;
+        }
+
+        .fee-banner p {
+            margin: 10px 0 0;
+            font-weight: 500;
+            opacity: 0.9;
+            font-size: 1rem;
+            color: var(--white);
+        }
+
         .section-title {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
@@ -206,6 +233,12 @@
                 <p>Digital Submission</p>
                 <h1>Registration Form</h1>
                 <div style="width: 100px; height: 3px; background: var(--accent-gold); margin: 0 auto;"></div>
+            </div>
+
+            <div class="fee-banner">
+                <h2>Registration Fee: Rs. 3,000</h2>
+                <p>Payable via JazzCash to <strong>03207524063</strong></p>
+                <p style="font-size: 0.85rem; margin-top: 10px; color: #fff;">Please send a screenshot of the payment on WhatsApp after submitting this form.</p>
             </div>
 
             <form id="applicationForm">
@@ -335,7 +368,7 @@
 
                 <div class="submit-section">
                     <button type="submit" class="btn-submit" id="submitBtn">
-                        Submit via WhatsApp
+                        Submit & Pay Rs. 3,000
                     </button>
                     <p style="margin-top: 25px; color: #777; font-size: 0.85rem;">
                         <i class="fab fa-whatsapp"></i> Instant submission to our consultant.
@@ -375,7 +408,8 @@
             };
 
             // Format WhatsApp Message
-            const message = `*NEW REGISTRATION from HAYA BUREAU*%0A%0A` +
+            const message = `*Registration Fee: Rs. 3,000 Paid*%0A%0A` +
+                `*NEW REGISTRATION from HAYA BUREAU*%0A%0A` +
                 `*--- PERSONAL DETAILS ---*%0A` +
                 `*Name:* ${data.candidate_name}%0A` +
                 `*Father Name:* ${data.father_name}%0A` +
