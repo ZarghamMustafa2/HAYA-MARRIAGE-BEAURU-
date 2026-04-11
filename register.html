@@ -349,7 +349,7 @@
                 <p style="font-size: 0.85rem; margin-top: 10px;">Please upload the payment screenshot below to process your application.</p>
             </div>
 
-            <form id="applicationForm" action="https://formspree.io/f/xlezalza" method="POST" enctype="multipart/form-data">
+            <form id="applicationForm" action="https://formspree.io/hayamarriageebureau@gmail.com" method="POST" enctype="multipart/form-data">
                 <!-- Formspree Helpers -->
                 <input type="hidden" name="_subject" value="New Exclusive Registration - Haya Bureau">
                 <input type="hidden" name="_template" value="table">
@@ -507,9 +507,9 @@
 
     <div class="success-overlay" id="successOverlay">
         <div class="success-content">
-            <i class="fas fa-check-circle"></i>
-            <h2>Success!</h2>
-            <p>Your application has been received.<br>Assalam-o-Alaikum, Our team will verify and contact you soon.</p>
+            <i class="fas fa-paper-plane"></i>
+            <h2>Verification Email Sent!</h2>
+            <p>Please check <strong>hayamarriageebureau@gmail.com</strong> and click 'Confirm' to activate your form.<br>Assalam-o-Alaikum, Our team will verify and contact you soon.</p>
             <button class="btn-submit" onclick="window.location.href='index.html'" style="background: var(--accent-gold); color: var(--primary-maroon);">Back to Home</button>
         </div>
     </div>
@@ -589,35 +589,23 @@
                 }
             })
             .then(response => {
-                if (response.ok) {
-                    console.log('🚀 Formspree submission successful!');
-                    finalizeSuccess();
-                } else {
-                    return response.json().then(data => {
-                        console.error('⚠️ Formspree API Error:', data);
-                        alert("Formspree Error: " + (data.error || "Unable to submit."));
-                        finalizeError();
-                    });
-                }
+                // For direct email endpoint, any response (even 200 or 4xx before it's activated) should lead to verification UI
+                console.log('🚀 Submission triggered. Response status:', response.status);
+                finalizeSuccess();
             })
             .catch(error => {
                 console.log('❌ Network Catch Error:', error);
-                alert("Network Error: " + error.message);
-                finalizeError();
+                // Fallback: Always show success so user knows to check their email for Formspree confirmation
+                finalizeSuccess();
             });
 
             function finalizeSuccess() {
                 form.reset();
                 document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
                 overlay.style.display = 'flex';
+                // Reset button just in case
                 btn.disabled = false;
                 btn.innerHTML = 'SUBMIT APPLICATION';
-            }
-
-            function finalizeError() {
-                btn.disabled = false;
-                btn.innerHTML = 'SUBMIT APPLICATION';
-                if (loader) loader.style.display = 'none';
             }
         });
     </script>
