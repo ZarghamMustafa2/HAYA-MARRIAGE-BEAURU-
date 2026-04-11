@@ -349,38 +349,37 @@
                 <p style="font-size: 0.85rem; margin-top: 10px;">Please upload the payment screenshot below to process your application.</p>
             </div>
 
-            <form id="applicationForm" action="https://formspree.io/f/hayamarriageebureau@gmail.com" method="POST" enctype="multipart/form-data">
+            <form id="applicationForm" action="https://formspree.io/f/xlezalza" method="POST" enctype="multipart/form-data">
                 <!-- Formspree Helpers -->
-                <input type="hidden" name="_subject" value="New Highly Confidential Registration - Haya Marriage Bureau">
-                <input type="hidden" name="_to" value="hayamarriageebureau@gmail.com">
+                <input type="hidden" name="_subject" value="New Exclusive Registration - Haya Bureau">
                 <input type="hidden" name="_template" value="table">
                 
                 <!-- Personal Details -->
                 <div class="section-title">Personal Details</div>
                 <div class="form-grid">
                     <div class="input-group">
-                        <label>Full Name</label>
-                        <input type="text" name="full_name" placeholder="As per CNIC" required>
+                        <label>Candidate Full Name</label>
+                        <input type="text" name="Candidate_Full_Name" placeholder="As per CNIC" required>
                     </div>
                     <div class="input-group">
                         <label>Father's Name</label>
-                        <input type="text" name="father_name" required>
+                        <input type="text" name="Candidate_Father_Name" required>
                     </div>
                     <div class="input-group">
                         <label>Age</label>
-                        <input type="number" name="age" min="18" max="70" required>
+                        <input type="number" name="Candidate_Age" min="18" max="70" required>
                     </div>
                     <div class="input-group">
                         <label>Height</label>
-                        <input type="text" name="height" placeholder="e.g. 5' 6\" required>
+                        <input type="text" name="Candidate_Height" placeholder="e.g. 5' 6\" required>
                     </div>
                     <div class="input-group">
                         <label>Caste</label>
-                        <input type="text" name="caste" required>
+                        <input type="text" name="Candidate_Caste" required>
                     </div>
                     <div class="input-group">
                         <label>Sect</label>
-                        <select name="sect" required>
+                        <select name="Candidate_Sect" required>
                             <option value="" disabled selected>Select Sect</option>
                             <option value="Sunni">Sunni</option>
                             <option value="Shia">Shia</option>
@@ -393,19 +392,19 @@
                     </div>
                     <div class="input-group">
                         <label>Education</label>
-                        <input type="text" name="education" placeholder="Last Degree / Qualification" required>
+                        <input type="text" name="Candidate_Education" placeholder="Last Degree / Qualification" required>
                     </div>
                     <div class="input-group">
                         <label>Profession</label>
-                        <input type="text" name="profession" placeholder="e.g. Software Engineer / Doctor" required>
+                        <input type="text" name="Candidate_Profession" placeholder="e.g. Software Engineer / Doctor" required>
                     </div>
                     <div class="input-group">
                         <label>Monthly Income</label>
-                        <input type="text" name="income" placeholder="e.g. 150k+" required>
+                        <input type="text" name="Candidate_Monthly_Income" placeholder="e.g. 150k+" required>
                     </div>
                     <div class="input-group">
                         <label>Marital Status</label>
-                        <select name="marital_status" required>
+                        <select name="Candidate_Marital_Status" required>
                             <option value="Single">Single</option>
                             <option value="Divorced">Divorced</option>
                             <option value="Widowed">Widowed</option>
@@ -419,29 +418,29 @@
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Father Status</label>
-                        <select name="father_status" required>
+                        <select name="Family_Father_Status" required>
                             <option value="Alive">Alive</option>
                             <option value="Passed Away">Passed Away</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label>Mother Status</label>
-                        <select name="mother_status" required>
+                        <select name="Family_Mother_Status" required>
                             <option value="Alive">Alive</option>
                             <option value="Passed Away">Passed Away</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label>Brothers Count</label>
-                        <input type="number" name="brothers_count" min="0" required>
+                        <input type="number" name="Family_Brothers_Count" min="0" required>
                     </div>
                     <div class="input-group">
                         <label>Sisters Count</label>
-                        <input type="number" name="sisters_count" min="0" required>
+                        <input type="number" name="Family_Sisters_Count" min="0" required>
                     </div>
                     <div class="input-group full-width">
                         <label>House Type</label>
-                        <select name="house_type" required>
+                        <select name="Family_House_Type" required>
                             <option value="Own (Independent)">Own (Independent)</option>
                             <option value="Own (Joint)">Own (Joint)</option>
                             <option value="Rented">Rented</option>
@@ -455,19 +454,19 @@
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Preferred Age Range</label>
-                        <input type="text" name="partner_preferred_age" placeholder="e.g. 22-26" required>
+                        <input type="text" name="Partner_Preferred_Age" placeholder="e.g. 22-26" required>
                     </div>
                     <div class="input-group">
                         <label>Preferred City</label>
-                        <input type="text" name="partner_preferred_city" placeholder="e.g. Lahore / Any" required>
+                        <input type="text" name="Partner_Preferred_City" placeholder="e.g. Lahore / Any" required>
                     </div>
                     <div class="input-group">
                         <label>Preferred Caste</label>
-                        <input type="text" name="partner_preferred_caste" placeholder="e.g. Same / Any" required>
+                        <input type="text" name="Partner_Preferred_Caste" placeholder="e.g. Same / Any" required>
                     </div>
                     <div class="input-group">
                         <label>Preferred Education</label>
-                        <input type="text" name="partner_preferred_education" placeholder="e.g. Masters / Graduate" required>
+                        <input type="text" name="Partner_Preferred_Education" placeholder="e.g. Masters / Graduate" required>
                     </div>
                 </div>
 
@@ -480,7 +479,7 @@
                             <i class="fas fa-camera"></i>
                             <p>Select Photo</p>
                             <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="attachment_profile_photo" accept="image/*" required onchange="updateFileName(this)">
+                            <input type="file" name="Profile_Photo_Upload" accept="image/*" required onchange="updateFileName(this)">
                         </div>
                     </div>
                     <div class="input-group">
@@ -489,7 +488,7 @@
                             <i class="fas fa-receipt"></i>
                             <p>Upload Screenshot</p>
                             <span class="file-name" style="font-size: 0.75rem; color: #666;"></span>
-                            <input type="file" name="attachment_payment_screenshot" accept="image/*" required onchange="updateFileName(this)">
+                            <input type="file" name="Payment_Screenshot_Upload" accept="image/*" required onchange="updateFileName(this)">
                         </div>
                     </div>
                 </div>
@@ -534,7 +533,7 @@
             <div class="footer-bottom">
                 <div class="copyright">&copy; 2026 Haya Marriage Bureau. Zenith of Matrimony.</div>
                 <div class="developer-signature" style="font-size: 12px; color: #D4AF37;">
-                    Developed by: <a href="https://wa.me/92307966161669" target="_blank" style="color: #D4AF37; text-decoration: none; font-weight: 700;">Zargham Mustafa</a>
+                    Developed by: <a href="https://wa.me/923079661669" target="_blank" style="color: #D4AF37; text-decoration: none; font-weight: 700;">Zargham Mustafa</a>
                 </div>
             </div>
         </div>
@@ -543,6 +542,15 @@
     <script>
         function updateFileName(input) {
             const fileName = input.files[0] ? input.files[0].name : "";
+            const sizeInMB = input.files[0] ? input.files[0].size / (1024 * 1024) : 0;
+            
+            if (sizeInMB > 2) {
+                alert("File is too large! Please upload a file smaller than 2MB.");
+                input.value = "";
+                input.parentElement.querySelector('.file-name').textContent = "";
+                return;
+            }
+            
             input.parentElement.querySelector('.file-name').textContent = fileName;
         }
 
@@ -561,7 +569,7 @@
             const formData = new FormData(form);
             const dataObj = Object.fromEntries(formData.entries());
 
-            // 2. Backup Logic: Save to LocalStorage immediately in case of network/API failure
+            // 2. Backup Logic: Save to LocalStorage immediately
             const backupId = 'backup_' + Date.now();
             try {
                 const existingBackups = JSON.parse(localStorage.getItem('haya_form_backups') || '[]');
@@ -587,27 +595,29 @@
                 } else {
                     return response.json().then(data => {
                         console.error('⚠️ Formspree API Error:', data);
-                        // Mandatory Fallback: Even if it fails, we show success to the user as requested
-                        // but we log it heavily so it's not lost.
-                        finalizeSuccess();
+                        alert("Formspree Error: " + (data.error || "Unable to submit."));
+                        finalizeError();
                     });
                 }
             })
             .catch(error => {
                 console.log('❌ Network Catch Error:', error);
-                // Mandatory Fallback: Show success anyway
-                finalizeSuccess();
+                alert("Network Error: " + error.message);
+                finalizeError();
             });
 
             function finalizeSuccess() {
                 form.reset();
-                // Clear file names in UI
                 document.querySelectorAll('.file-name').forEach(el => el.textContent = '');
-                // Show Success Message
                 overlay.style.display = 'flex';
-                // Reset button just in case they close overlay (though it redirects/reloads usually)
                 btn.disabled = false;
-                btn.innerHTML = 'SUBMIT APPLICATION <div class="loader" id="loader"></div>';
+                btn.innerHTML = 'SUBMIT APPLICATION';
+            }
+
+            function finalizeError() {
+                btn.disabled = false;
+                btn.innerHTML = 'SUBMIT APPLICATION';
+                if (loader) loader.style.display = 'none';
             }
         });
     </script>
