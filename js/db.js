@@ -29,7 +29,8 @@ const males = [
     { id: "M-23", name: "Atif Aslam", gender: "Male", age: 64, city: "Karachi", education: "Vocalist", sect: "Sunni", tier: "Gold" },
     { id: "M-24", name: "Shehryar Munawar", gender: "Male", age: 66, city: "Islamabad", education: "Marketing", sect: "Sunni", tier: "Diamond" },
     { id: "M-25", name: "Haris Rauf", gender: "Male", age: 68, city: "Overseas", education: "Sports Science", sect: "Sunni", tier: "Gold" },
-    { id: "HAYA-M-004", name: "Nadir Abbas", gender: "Male", age: 25, city: "Karachi", education: "8th Grade (Middle)", sect: "Khokhar (Islam/Madni)", tier: "Gold", caste: "Khokhar (Islam/Madni)", height: "6 ft", maritalStatus: "Single", profession: "Cloth Business (Shop Worker)", income: "Rs. 30,000", house: "5 Kanal (Owned) + Agricultural Land", family: "3 Brothers (All married), 5 Sisters (3 married, 2 unmarried)", transport: "Bike available" }
+    { id: "HAYA-M-004", name: "Nadir Abbas", gender: "Male", age: 25, city: "Karachi", education: "8th Grade (Middle)", sect: "Khokhar (Islam/Madni)", tier: "Gold", caste: "Khokhar (Islam/Madni)", height: "6 ft", maritalStatus: "Single", profession: "Cloth Business (Shop Worker)", income: "Rs. 30,000", house: "5 Kanal (Owned) + Agricultural Land", family: "3 Brothers (All married), 5 Sisters (3 married, 2 unmarried)", transport: "Bike available" },
+    { id: "HAYA-M-005", name: "Waqas", gender: "Male", age: 32, city: "Lahore", education: "FA", sect: "Syed (Sunni)", tier: "Premium", caste: "Syed (Sunni)", height: "5.3 ft", maritalStatus: "First Marriage", profession: "Private Job (Lahore)", income: "Rs. 60,000", house: "7 Marla (Owned)", family: "5 Brothers, 2 Sisters (Army Retired Father)", transport: "Bike available" }
 ];
 
 const females = [
