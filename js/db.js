@@ -33,7 +33,8 @@ const males = [
     { id: "HAYA-M-005", name: "Waqas", gender: "Male", age: 32, city: "Lahore", education: "FA", sect: "Syed (Sunni)", tier: "Premium", caste: "Syed (Sunni)", height: "5.3 ft", maritalStatus: "First Marriage", profession: "Private Job (Lahore)", income: "Rs. 60,000", house: "7 Marla (Owned)", family: "5 Brothers, 2 Sisters (Army Retired Father)", transport: "Bike available" },
     { id: "HAYA-M-006", name: "Najibullah", gender: "Male", age: 50, city: "Quetta", education: "Not Specified", sect: "Pathan Tareen (Sunni)", tier: "Premium", caste: "Pathan Tareen (Sunni)", height: "5 ft", maritalStatus: "Second Marriage", profession: "Farmer (کھیتی باڑی)", income: "Rs. 20,000", house: "4 Marla (Owned)", family: "3 Brothers, 3 Sisters (All married)", transport: "Bike available", children: "1 Son (Living with father)" },
     { id: "HAYA-M-007", name: "M. Tanveer", gender: "Male", age: 21, city: "Faisalabad", education: "Middle (8th Grade)", sect: "Rehmani (Sunni)", tier: "Premium", caste: "Rehmani (Sunni)", height: "5.2 ft", maritalStatus: "First Marriage", profession: "Private Job (Mill Worker)", income: "Rs. 30,000", house: "2 Marla (Owned)", family: "1 Brother (Married), 1 Sister (Unmarried)", transport: "Bike available" },
-    { id: "HAYA-M-008", name: "Waseem", gender: "Male", age: 33, city: "Gwadar/Iran", education: "Engineer (انجینئر)", sect: "Pathan (Islam)", tier: "Premium", caste: "Pathan (Islam)", height: "Not Specified", maritalStatus: "First Marriage", profession: "Export Business (Iran)", income: "Rs. 500k - 1M", house: "1 Acre (Owned)", family: "8 Brothers (5 Married, 3 Unmarried), Parents alive", nationality: "Iran / Pakistan" }
+    { id: "HAYA-M-008", name: "Waseem", gender: "Male", age: 33, city: "Gwadar/Iran", education: "Engineer (انجینئر)", sect: "Pathan (Islam)", tier: "Premium", caste: "Pathan (Islam)", height: "Not Specified", maritalStatus: "First Marriage", profession: "Export Business (Iran)", income: "Rs. 500k - 1M", house: "1 Acre (Owned)", family: "8 Brothers (5 Married, 3 Unmarried), Parents alive", nationality: "Iran / Pakistan" },
+    { id: "HAYA-M-009", name: "Wajid Ali", gender: "Male", age: 25, city: "Okara", education: "6th Grade", sect: "Sheikh (Sunni)", tier: "Premium", caste: "Sheikh (Sunni)", height: "6 ft", maritalStatus: "First Marriage", profession: "Private Job (Own Cart/Stall Business)", house: "8 Marla (Owned)", family: "4 Brothers (3 married, 1 unmarried), 4 Sisters (All unmarried)", transport: "Bike available" }
 ];
 
 const females = [
@@ -68,7 +69,7 @@ export const allProfiles = [...males, ...females];
 
 class MarriageBureauDB {
     constructor() {
-        this.INIT_DATA_KEY = 'haya_db_restored_v5';
+        this.INIT_DATA_KEY = 'haya_db_restored_v6';
         this.init();
     }
 
